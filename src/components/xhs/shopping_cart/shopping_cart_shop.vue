@@ -24,6 +24,7 @@
         <div class="shop_name">
           <div>
             <img
+              class="ml-2"
               :src="require(`../../../assets/${item.is_checked ? 'gouSolid-copy.png' : 'yuanquan.png'}`)"
               @click="choose(i)"
             />
@@ -44,25 +45,28 @@
             <img src="../../../assets/icon-r.png" alt />
           </a>
         </div>
-        <div class="describe ">
+        <div class="describe">
           <img
-              :src="require(`../../../assets/${item.is_checked ? 'gouSolid-copy.png' : 'yuanquan.png'}`)"
-              @click="choose(i)"
-            />
-            <div class="desc">
-              <a href="javascript:;"><img :src="require(`../../../../public/img/e61865991d0c4e19.jpg`)" alt=""></a>
+            :src="require(`../../../assets/${item.is_checked ? 'gouSolid-copy.png' : 'yuanquan.png'}`)"
+            @click="choose(i)"
+            class="ml-2"
+          />
+          <div class="desc">
+            <a href="javascript:;">
+              <img :src="require(`../../../../public/img/e61865991d0c4e19.jpg`)" alt />
+            </a>
+          </div>
+          <div class="product-details">
+            <p>{{item.store}}</p>
+            <p>{{item.detail}}</p>
+            <p>{{item.capacity}}</p>
+            <div class="d-flex justify-content-around">
+              <span class="text-danger">￥{{item.price}}</span>
+              <button @click="change(-1,i)">-</button>
+              <span>{{item.count}}</span>
+              <button @click="change(1,i)">+</button>
             </div>
-            <div class="product-details">
-              <p>{{item.store}}</p>
-              <p>{{item.detail}}</p>
-              <p>{{item.capacity}}</p>
-              <div class="d-flex justify-content-around " >
-                <span class="text-danger">￥{{item.price}}</span>
-                <button @click="change(-1,i)">-</button>
-                <span>{{item.count}}</span>
-                <button @click="change(1,i)">+</button>
-              </div>
-            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -77,13 +81,14 @@ export default {
   methods: {
     choose(i) {
       this.list[i].is_checked = !this.list[i].is_checked;
+      // this.bus.$emit("product-list", this.list);     
     },
-    change(n,i){
-      if(this.list[i].count==1&&n==-1){
-        this.$toast("最少购买一件商品哦")
-        return
-      }else{
-        this.list[i].count+=n
+    change(n, i) {
+      if (this.list[i].count == 1 && n == -1) {
+        this.$toast("最少购买一件商品哦");
+        return;
+      } else {
+        this.list[i].count += n;
       }
     }
   }
@@ -188,36 +193,37 @@ a {
 /* 商品列表 */
 .goods {
   margin: 1rem;
-  background-color: #FFEFD5;
+  background-color: #ffefd5;
 }
 /* 商品 */
-.describe{
+.describe {
   display: flex;
   justify-content: space-between;
   height: 7rem;
   align-items: center;
 }
-.describe>img{
+.describe > img {
   height: 2rem;
-  width:2rem;
+  width: 2rem;
 }
-.describe>.desc img{
-  width:6rem;
+.describe > .desc img {
+  width: 6rem;
   height: 6rem;
 }
 /* 商品详情 */
-.product-details{
+.product-details {
   width: 10rem;
 }
-.product-details>p{
+.product-details > p {
   margin: 0;
 }
 /* 加减按钮 */
-.product-details button{
-  width: 1.5rem;height: 1.5rem;
+.product-details button {
+  width: 1.5rem;
+  height: 1.5rem;
   padding: 0;
   font-size: 1rem;
-  background-color:#f5f5f5;
+  background-color: #f5f5f5;
   border: 0;
 }
 </style>
