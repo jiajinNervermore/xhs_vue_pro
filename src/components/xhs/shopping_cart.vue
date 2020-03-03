@@ -27,7 +27,7 @@
               <p class="text-muted">免运费</p>
             </li>
             <li>
-              <span class="clear mr-2 ml-2">结算</span>
+              <span class="clear mr-2 ml-2" @click="clear">结算</span>
             </li>
           </ul>
         </li>
@@ -77,6 +77,10 @@ export default {
   methods: {
     choose() {
       this.is_checked=!this.is_checked
+    },
+    // 结算按钮
+    clear(){
+      this.$router.push("/users/pay")
     }
   }
 };
