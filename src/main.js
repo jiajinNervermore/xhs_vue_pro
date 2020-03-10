@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import store from './store'
 import router from './router'
 //功能一：引入和配置Mint-ui组件库
 //1.引入mint-ui所有组件
@@ -23,7 +24,7 @@ import vuex from "vuex"
 //2.注册
 Vue.use(vuex)
 //3.创建存储对象
-var store = new vuex.Store({
+/*var store = new vuex.Store({
   state:{
     //全局共享的数据
     cartCount:0
@@ -36,7 +37,7 @@ var store = new vuex.Store({
   getters:{//所有获取全局共享数据函数
     getCartCount(state){return state.cartCount}
   }
-})
+})*/
 //3.将Mint-ui对象注册vue实例
 Vue.use(MintUI)
 new Vue({
