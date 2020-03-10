@@ -1,7 +1,7 @@
 <template>
   <div class="third">
     <ul class="row">
-      <li class="col-4 p-1" v-for="(img,i) of imgs" :key="i">
+      <li class="col-4 item" v-for="(img,i) of imgs" :key="i">
         <img class="w-100" :src="img.src" alt="" style="border-radius:8px;">
       </li>
     </ul>
@@ -25,9 +25,18 @@
   </div>
 </template>
 <style scoped>
+  .row>li.item:first-child{
+    padding-right: 1px;
+  }
+  .row>li.item:nth-child(2){
+    padding-right: 1px;
+    padding-left: 1px;
+  }
+  .row>li.item:last-child{
+    padding-left: 1px;
+  }
   .w-100{width: 100%;}
   .m-1{margin:5px;}
-  .p-1{padding:5px;}
   .third{
     padding: 3px;
     margin: 5px;
@@ -69,7 +78,7 @@
     background:#f00;
     border-radius:10px;
     right: 0px;
-    z-index: 10;
+    z-index: 1;
     font-size: 10px;
     padding: 2px 4px 2px 4px;
   }

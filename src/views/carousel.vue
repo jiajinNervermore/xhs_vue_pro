@@ -1,13 +1,14 @@
 <template>
 <div>
+  <headtitle></headtitle>
   <div class="carousel" :style="{width:wd}">
     <!-- 轮播图片 -->
     <div class="carousel-list" :style="ulStyle" :class="{transition:tran}">
       <div :style="{width:wd+'px'}" class="carousel-item" v-for="(item,i) of list" :key="i">
-        <img :src="item.src" alt="">
+        <img :src="url+item.img" alt="">
       </div>
       <div :style="{width:wd+'px'}" class="carousel-item">
-        <img :src="list[0].src" alt="">
+        <img :src="url+list[0].img" alt="">
       </div>
     </div>
     <!-- 点 -->
@@ -66,21 +67,20 @@
   .carousel>.ul-list>.li-dian.active{
     background-color: blue;
   }
+  
 </style>
 <script>
 import second from './second'
 import third from './third'
 import timelimit from './TimeLimit'
 import recommend from './recommend'
+import headtitle from './headtitle'
 export default {
   data(){
     return {
+      url:"http://127.0.0.1:9527/",
       list:[
-        {src:require("../assets/shopping/carousel/carousel_1.jpg")},
-        {src:require("../assets/shopping/carousel/carousel_2.jpg")},
-        {src:require("../assets/shopping/carousel/carousel_3.jpg")},
-        {src:require("../assets/shopping/carousel/carousel_4.jpg")},
-        {src:require("../assets/shopping/carousel/carousel_5.jpg")}
+        {img:""}
       ],
       wd:window.innerWidth,
       time:0,
@@ -100,13 +100,17 @@ export default {
             },50)
           },1000)
         }
-      },2000)
+      },3000)
     }
   },
   created(){
     this.moveto();
     window.addEventListener("resize",()=>{
       this.wd=window.innerWidth;
+    });
+    this.axios.get("/product")
+    .then(res=>{
+      this.list=res.data.data;
     })
   },
   computed:{
@@ -117,7 +121,7 @@ export default {
     }
   },
   components:{
-    second,third,timelimit,recommend
+    second,third,timelimit,recommend,headtitle
   }
 }
 </script>

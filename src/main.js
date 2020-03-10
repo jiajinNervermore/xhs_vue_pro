@@ -13,7 +13,7 @@ Vue.use(vuex)
 //引入axios 模块
 import axios from "axios"
 //添加默认请求服务器url
-axios.defaults.baseURL="http://127.0.0.1:4000"
+axios.defaults.baseURL="http://127.0.0.1:9527"
 //配置保存session数据
 axios.defaults.withCredentials=true;
 //给vue原型对象添加axios函数

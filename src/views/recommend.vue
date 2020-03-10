@@ -3,11 +3,24 @@
     <ul>
       <li @click="changeActive(i)" :class="{active:l.isActive}" v-for="(l,i) of list" :key="i">{{l.title}}</li>
     </ul>
+    <div class="spitem">
+      <spitem class="product" v-for="(item,i) of items" :key="i" :item="item"></spitem>
+    </div>
   </div>
 </template>
 <style scoped>
+  .spitem{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .product{
+    width: 48%;
+    margin: 3px;
+  }
   .con{
     padding: 8px;
+    position: relative;
   }
   ul{
     position: relative;
@@ -31,6 +44,7 @@
   }
 </style>
 <script>
+import spitem from './spItem'
 export default {
   data(){
     return {
@@ -42,6 +56,7 @@ export default {
         {title:"个护",isActive:false},
         {title:"保健",isActive:false},
       ],
+      items:[]
     }
   },
   methods:{
@@ -51,6 +66,15 @@ export default {
       }
       this.list[i].isActive=true;
     }
+  },
+  components:{
+    spitem
+  },
+  created(){
+    this.axios.get("/item")
+    .then(res=>{
+      this.items=res.data.data;
+    })
   }
 }
 </script>

@@ -44,14 +44,14 @@ export default {
       ],
       bottomlist:[
         {title:"福利社",subtitle:"套装",src:[{src:require('../assets/shopping/third/xianshi05.png')},{src:require('../assets/shopping/third/xianshi06.png')}]},
-        {title:"福利社",subtitle:"套装",src:[{src:require('../assets/shopping/third/xianshi07.png')},{src:require('../assets/shopping/third/xianshi08.png')}]},
+        {title:"精选品牌",subtitle:"AFS MALL",src:[{src:require('../assets/shopping/third/xianshi07.png')},{src:require('../assets/shopping/third/xianshi08.png')}]},
       ]
     }
   },
   methods:{
     timelimit(){
       var oldtime=new Date().getTime();
-      var newtime=new Date("2020-2-28").getTime();
+      var newtime=new Date(`2020-3-6`).getTime();
       var t=newtime-oldtime;
       var h=parseInt(t/1000/60/60%24);
       var m=parseInt(t/1000/60%60);
