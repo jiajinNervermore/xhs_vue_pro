@@ -6,12 +6,17 @@ import signin from './components/xhs/signin.vue'
 import shopping from './components/xhs/shopping_cart'
 //引入自定义组件 支付页面
 import pay from './components/xhs/pay'
+//引入自定义组件
+// import register from './components/xhs/register.vue'
+import Carousel from './views/carousel'
 Vue.use(Router)//将路由对象注册
 //配置组件访问路径
 export default new Router({
   routes:[
     {path:"/users/signin",component:signin},
     {path:"/users/shopping",component:shopping},
-    {path:"/users/pay",component:pay}
+    {path:"/users/pay",component:pay},
+    // {path:"/signin",component:register},
+    {path:"/carousel",component:Carousel}
   ]
 })
