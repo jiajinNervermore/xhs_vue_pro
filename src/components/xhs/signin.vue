@@ -121,6 +121,8 @@ export default {
         console.log(res);
         if (res.data.code == 1) {
           this.$toast("登录成功");
+          // 跳转到主页
+          this.$router.push('/index')
           return;
         } else {
           this.$toast("登录失败");
@@ -164,13 +166,13 @@ a {
   color: #0000cc;
 }
 /* 手机密码登录样式 */
-.ppl {
+.register .ppl {
   text-decoration: none;
   color: #969696;
   font-size: 1rem;
 }
 /* 标题样式 */
-.title {
+.register .title {
   margin-bottom: 3rem;
   color: #242424;
 }
@@ -186,7 +188,7 @@ a {
   color: #969696;
 }
 /* 页头样式 */
-.header {
+.register .header {
   width: 100%;
   height: 3rem;
   display: flex;
@@ -194,12 +196,12 @@ a {
   align-items: center;
 }
 /* 左箭头 返回 */
-.header img {
+.register .header img {
   width: 2rem;
   height: 2rem;
 }
 /* 输入框样式 */
-input {
+.register input {
   height: 3rem;
   font-size: 1.5rem;
   background: none;
@@ -208,8 +210,8 @@ input {
   padding: 0.3rem;
 }
 /* 手机号码和验证码输入框样式 */
-.phone,
-.password {
+.register .phone,
+.register .password {
   height: 3rem;
   margin-left: 1rem;
   margin-right: 1rem;
@@ -219,7 +221,7 @@ input {
   align-items: center;
 }
 /* 发送验证码 */
-.verification {
+.register .verification {
   position: absolute;
   right: 1rem;
   border: 0;
@@ -228,33 +230,33 @@ input {
   display: none;
 }
 /* 倒计时 */
-.count_down {
+.register .count_down {
   position: absolute;
   right: 1rem;
   display: none;
 }
 /* 地理位置+86 */
-.area {
+.register .area {
   display: flex;
   align-items: center;
   font-size: 2rem;
   color: lightgrey;
 }
 /* 注册协议栏 */
-.protocaol {
+.register .protocaol {
   margin-top: 1.5rem;
   margin-bottom: 2.5rem;
   font-size: 1rem;
 }
 /* 登录按钮 */
-.login-btn {
+.register .login-btn {
   border-radius: 2rem;
   height: 3rem;
   line-height: 3rem;
   margin-bottom: 3rem;
   /* color:#fff; */
 }
-.login {
+.register .login {
   border-radius: 2rem;
   height: 3rem;
   line-height: 3rem;
@@ -263,16 +265,16 @@ input {
   background-color: #ff0033;
 }
 /* 合作伙伴 */
-.partner {
+.register .partner {
   display: flex;
   justify-content: space-around;
 }
-.partner img {
+.register .partner img {
   width: 2rem;
   height: 2rem;
 }
 /* 验证码信息自动输入 */
-.message_vc {
+.register .message_vc {
   display: none;
   position: fixed;
   bottom:18rem;
@@ -282,7 +284,7 @@ input {
   background-color: lightgray;
 }
 /* 手机号码输入框 */
-.input_number {
+ .input_number {
   height: 0;
   position: fixed;
   bottom: 0;
@@ -291,7 +293,7 @@ input {
   justify-content: end;
 }
 /* 手机号码输入框过渡效果 */
-.input_number_trans {
+ .input_number_trans {
   width: 100%;
   height: 18rem;
   position: fixed;
@@ -305,7 +307,7 @@ input {
   padding: 0;
 }
 /* 数字按钮 */
-.num {
+ .num {
   background-color: #fff;
   color: #000;
   text-align: center;
@@ -315,7 +317,7 @@ input {
   border-radius: 0.5rem;
   width: 30%;
 }
-.num > span:first-child {
+ .num > span:first-child {
   font-size: 2rem;
 }
 .num > span:last-child {
@@ -335,7 +337,7 @@ input {
   height: 0;
 }
 /* 过渡效果 */
-.close_num_trans {
+ .close_num_trans {
   position: absolute;
   bottom: 0;
   right: 0.9rem;

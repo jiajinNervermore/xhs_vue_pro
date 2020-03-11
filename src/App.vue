@@ -7,6 +7,7 @@
 </template>
 <style>
    *{
-     padding:0px;margin: 0;box-sizing: border-box;
+     /* padding:0px;margin: 0;box-sizing: border-box; */
+     
    }
 </style>
