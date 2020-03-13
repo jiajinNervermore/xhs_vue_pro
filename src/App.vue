@@ -1,32 +1,49 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+ <div class="app-container">
+    <!--显示组件容器-->
+    <router-view>
+    </router-view>
+ </div>
 </template>
-
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+    body{
+        margin: 0;
+        padding: 0;
+        Font-size : 62.5%;
+        box-sizing:border-box;
+    }
+   .app-container{
+     padding-top:0px;
+     padding-bottom:0px;
+     overflow-x:hidden;
+   }
+ .mui-bar-tab .mui-tab-item-tao.mui-active {
+    color: #007aff;
+ }
+.mui-bar-tab .mui-tab-item-tao {
+    display: table-cell;
+    overflow: hidden;
+    width: 1%;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #929292;
+}
+.mui-bar-tab .mui-tab-item-tao .mui-icon {
+    top: 3px;
+    width: 24px;
+    height: 24px;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
-#nav {
-  padding: 30px;
-}
+.mui-bar-tab .mui-tab-item-tao .mui-icon~.mui-tab-label {
+   font-size:11px;
+   display:block;
+   overflow:hidden;
+   text-overflow:ellipsis;
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
 }
 </style>
