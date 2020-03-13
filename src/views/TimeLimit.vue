@@ -51,7 +51,7 @@ export default {
   methods:{
     timelimit(){
       var oldtime=new Date().getTime();
-      var newtime=new Date(`2020-3-6`).getTime();
+      var newtime=new Date(`2020-3-12`).getTime();
       var t=newtime-oldtime;
       var h=parseInt(t/1000/60/60%24);
       var m=parseInt(t/1000/60%60);

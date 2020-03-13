@@ -2,7 +2,7 @@
   <div>
     <ul>
       <li>
-        <img :src="'http://127.0.0.1:9527/'+item.details_pic" alt="">
+        <img :src="url+item.details_pic" alt="">
       </li>
       <li><span>{{item.title}}</span></li>
       <li><span>{{item.subtitle}}</span></li>
@@ -14,7 +14,7 @@
 export default {
   data(){
     return {
-      list:[]
+      url:"http://127.0.0.1:9527/"
     }
   },
   props:["item"]

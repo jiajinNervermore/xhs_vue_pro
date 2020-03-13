@@ -5,15 +5,15 @@
     <!-- 轮播图片 -->
     <div class="carousel-list" :style="ulStyle" :class="{transition:tran}">
       <div :style="{width:wd+'px'}" class="carousel-item" v-for="(item,i) of list" :key="i">
-        <img :src="url+item.img" alt="">
+        <img v-if="item.img" :src="url+item.img" alt="">
       </div>
       <div :style="{width:wd+'px'}" class="carousel-item">
-        <img :src="url+list[0].img" alt="">
+        <img v-if="list[0].img" :src="url+list[0].img" alt="">
       </div>
     </div>
     <!-- 点 -->
     <ul class="ul-list">
-      <li class="li-dian" v-for="(d,i) of list" :key="i" :class="time==i?'active':''"></li>
+      <li class="li-dian" v-for="(d,i) of list" :key="i" :class="{active:time==i}"></li>
     </ul>
   </div>
   <second></second>

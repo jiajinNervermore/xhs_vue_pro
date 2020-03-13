@@ -11,7 +11,7 @@
       <span class="font">更多</span>
     </div>
   </div>
-  <div class="mask-none" @click="cha" :class="{'d-none':dnone,mask:tran,mask2:tran2}"></div>
+  <div :style="{height:height+'px'}" class="mask-none" @click="cha" :class="{'d-none':dnone,mask:tran,mask2:tran2}"></div>
   <div class="others" :class="{others2:tran}">
     <div class="top">
       <span class="more">更多功能</span>
@@ -97,9 +97,8 @@
   .d-none{display: none}
   .mask-none{
     width: 100%;
-    position: absolute;
+    position: fixed;
     margin-top: -50px;
-    height:1000px;
     background: #000;
     opacity: 0;
     z-index: 10;
@@ -154,7 +153,8 @@ export default {
         {src:require('../assets/shopping/others/04.png'),title:"心愿单"},
         {src:require('../assets/shopping/others/05.png'),title:"小红卡会员"},
         {src:require('../assets/shopping/others/06.png'),title:"客服"}
-      ]
+      ],
+      height:0
     }
   },
   methods:{
@@ -175,6 +175,10 @@ export default {
   },
   components:{
     search
+  },
+  created(){
+    var height=document.documentElement.clientHeight;
+    this.height=height;
   }
 }
 </script>
