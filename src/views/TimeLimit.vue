@@ -88,6 +88,7 @@ export default {
       ]
     };
   },
+<<<<<<< HEAD
   methods: {
     timelimit() {
       var oldtime = new Date().getTime();
@@ -100,6 +101,20 @@ export default {
       this.m = m > 9 ? m : "0" + m;
       this.s = s > 9 ? s : "0" + s;
       setTimeout(this.timelimit, 1000);
+=======
+  methods:{
+    timelimit(){
+      var oldtime=new Date().getTime();
+      var newtime=new Date(`2020-3-12`).getTime();
+      var t=newtime-oldtime;
+      var h=parseInt(t/1000/60/60%24);
+      var m=parseInt(t/1000/60%60);
+      var s=parseInt(t/1000%60);
+      this.h=h>9?h:'0'+h;
+      this.m=m>9?m:'0'+m;
+      this.s=s>9?s:'0'+s;
+      setTimeout(this.timelimit,1000);
+>>>>>>> xhs-2
     }
   },
   mounted() {

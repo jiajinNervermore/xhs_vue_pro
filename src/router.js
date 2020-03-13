@@ -14,15 +14,20 @@ import me from "./components/xhs/me"
 //引入主页组件
 import index from './components/xhs/index.vue'
 import Carousel from './views/carousel'
+import Indexcq from './views/indexcq'
 Vue.use(Router)//将路由对象注册
 //配置组件访问路径
 export default new Router({
   routes:[
     {path:"/users/signin",component:signin},
     {path:"/users/shopping",component:shopping},
-    {path:"/users/pay",component:pay},
+    {path:"/users/pay",component:pay}, 
     {path:"/users/me",component:me},
     {path:"/carousel",component:Carousel},
-    {path:"/index",component:index}
+    {path:"/index",component:index},
+    // {path:"/signin",component:register},
+    {path:"/indexcq",component:Indexcq},
+    {path:"/signin",component:register},
+    {path:"/carousel",component:Carousel}
   ]
 })
