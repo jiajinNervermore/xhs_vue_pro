@@ -1,7 +1,8 @@
 <template>
   <div class="shop">
     <div class="header">
-      <a href="javascript:;" class="mr-5 ml-1">
+      <!-- 返回按钮 -->
+      <a href="javascript:;" class="mr-5 ml-1" @click="backToStore">
         <img src="../../../assets/icon.png" alt />
       </a>
       <h3 class="ml-4 mr-5">购物车</h3>
@@ -79,6 +80,10 @@ export default {
     return {};
   },
   methods: {
+    // 返回商城
+    backToStore(){
+      this.$router.push('/index')
+    },
     choose(i) {
       this.list[i].is_checked = !this.list[i].is_checked;
       // this.bus.$emit("product-list", this.list);     

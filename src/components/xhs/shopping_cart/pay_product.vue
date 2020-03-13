@@ -1,4 +1,5 @@
 <template>
+<!-- 支付页面商品详情 -->
   <div class="product m-2">
     <ul class="list-unstyled m-2">
       <li>

@@ -1,7 +1,8 @@
 <template>
   <div class="pay">
     <div class="header">
-      <a href="javascript:;" class="mr-5 ml-1">
+      <!-- 返回购物车 -->
+      <a href="javascript:;" class="mr-5 ml-1" @click="backToShoppingCart">
         <img src="../../assets/icon.png" alt />
       </a>
       <h3 class="ml-5 mr-5">订单支付</h3>
@@ -118,6 +119,10 @@ export default {
       }
   },
   methods: {
+    // 返回键
+    backToShoppingCart(){
+      this.$router.push('/users/shopping')
+    },
     num: function (n) {
         return n < 10 ? '0' + n : '' + n
       },
@@ -191,28 +196,28 @@ a{
   margin: 1rem;
   border: none;
   resize: none;
-  background-color: #fffff0;
+  background-color: #fff;
 }
 /* 粘贴板 */
-#copy {
+.pay #copy {
   position: relative;
 }
 /* 粘贴板提交清除 */
-.control {
+.pay .control {
   position: absolute;
   bottom: 0;
   width: 100%;
   font-size: 1rem;
 }
 /* 粘贴板清除按钮 */
-.close {
+ .pay .close {
   position: absolute;
   right: 7rem;
   bottom: 2.5rem;
   font-size: 16px;
 }
 /* 粘贴板提交按钮 */
-.control > .submit {
+.pay .control > .submit {
   position: absolute;
   right: 2rem;
   bottom: 2rem;
@@ -226,7 +231,7 @@ a{
   color: #fff;
 }
 /* 页脚支付栏 */
-.footer{
+.pay .footer{
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -236,14 +241,15 @@ a{
   background-color: #fff;
   border-top: 1px solid lightgray;
   padding-right:1rem; 
+  z-index: 20;
 }
-.know:after{
+.pay .know:after{
   content: "";
   display: block;
   height: 4rem;
 }
 /* 支付按钮 */
-.pay_off{
+.pay .pay_off{
   height: 2.5rem;
   text-align: center;
   background-color: #ff0033;

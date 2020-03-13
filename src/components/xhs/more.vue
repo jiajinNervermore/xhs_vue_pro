@@ -1,6 +1,6 @@
 <template>
   <div :class="isClick?'moreTrans':'more'">
-    <div class="header">
+    <div :class="isClick?'headerTrans':'header'">
       <h1 class="mt-5">更多</h1>
     </div>
     <div class="space"></div>
@@ -16,12 +16,7 @@
 //引入vuex 保存的数据
 import { mapState } from "vuex";
 export default {
-  data() {
-    return {
-      isClick: false
-    };
-  },
-  props:{isClick:Boolean},
+  props: { isClick: Boolean },
   computed: {
     ...mapState(["moreList"])
   },
@@ -34,32 +29,54 @@ export default {
 };
 </script>
 <style scoped>
+.body{
+  padding: 3rem;
+}
 /*组件样式*/
 .more {
   position: fixed; /**固定定位 */
-  width: 80%; /**宽度 */
-  padding: 3rem; /**内边距 */
+  width: 0; /**宽度 */
+
   z-index: 10; /**定位层级 */
   left: -80%; /**以左边为参考位置偏移0 */
   background-color: #fff;
+  height: 100%;
+  overflow:auto;
+  transition: all 0.2s linear;
 }
 .moreTrans {
-   
+  overflow:auto;
+  height: 100%;
   position: fixed; /**固定定位 */
-  width: 80% !important;
-  padding: 3rem; /**内边距 */
+  width: 75% !important;
   z-index: 10; /**定位层级 */
   left: 0; /**以左边为参考位置偏移0 */
- 
-  transition: all 1s linear;
-  
+
+  transition: all 0.2s linear ;
 }
-/**头部样式 */
+/**头部样式 隐藏部分*/
 .header {
+  width: 0;
   height: 6rem; /**高度 */
   position: fixed; /**固定定位 */
-  z-index: 11; /**定位层级 */
+  z-index: 10; /**定位层级 */
   top: 0; /**定位以上面为参考边界偏移0 */
+  left: -80%;
+  background-color: #fff;
+  padding-left: 2rem;
+  transition: all 0.2s linear;
+}
+/**头部样式隐藏部分 */
+.headerTrans {
+  height: 6rem; /**高度 */
+  position: fixed; /**固定定位 */
+  z-index: 10; /**定位层级 */
+  top: 0; /**定位以上面为参考边界偏移0 */
+  background-color: #fff;
+  width: 75%;
+  padding-left: 2rem;
+  transition: all 0.2s linear;
+  left: 0;
 }
 /* 头部下方撑空间 */
 .space {
@@ -69,5 +86,4 @@ export default {
   width: 1.5rem;
   height: 1.5rem;
 }
-
 </style>

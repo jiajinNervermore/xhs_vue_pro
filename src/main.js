@@ -12,17 +12,16 @@ import bus from "./bus.js"
 //将bus添加到Vue原型对象中
 Vue.prototype.bus = bus
 //引入axios 模块
-import axios from "axios"
-//添加默认请求服务器url
-axios.defaults.baseURL="http://127.0.0.1:9527"
-//配置保存session数据
-axios.defaults.withCredentials=true;
+import axios from "./axios"
 //给vue原型对象添加axios函数
 Vue.prototype.axios=axios;
 //1.引入vuex组件
 import vuex from "vuex"
-//2.注册
+//2.注册 vuex axios
 Vue.use(vuex)
+Vue.use(axios)
+//阻止启动生产消息
+Vue.config.productionTip = false;
 //3.创建存储对象
 /*var store = new vuex.Store({
   state:{
