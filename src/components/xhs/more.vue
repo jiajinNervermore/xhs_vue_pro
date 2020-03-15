@@ -3,7 +3,6 @@
     <div :class="isClick?'headerTrans':'header'">
       <h1 class="mt-5">更多</h1>
     </div>
-    <div class="space"></div>
     <div class="body">
       <div v-for="(item,index) of moreList" :key="index" class="mb-4 mt-4">
         <img :src="require(`../../assets/${item.img}`)" class="mr-2" alt />
@@ -30,13 +29,14 @@ export default {
 </script>
 <style scoped>
 .body{
-  padding: 3rem;
+  padding: 2rem;
+  text-align: left;
 }
 /*组件样式*/
 .more {
   position: fixed; /**固定定位 */
   width: 0; /**宽度 */
-
+  
   z-index: 10; /**定位层级 */
   left: -80%; /**以左边为参考位置偏移0 */
   background-color: #fff;
@@ -45,6 +45,7 @@ export default {
   transition: all 0.2s linear;
 }
 .moreTrans {
+  text-align: left;
   overflow:auto;
   height: 100%;
   position: fixed; /**固定定位 */
@@ -78,10 +79,7 @@ export default {
   transition: all 0.2s linear;
   left: 0;
 }
-/* 头部下方撑空间 */
-.space {
-  height: 6rem; /**高度 */
-}
+
 .body img {
   width: 1.5rem;
   height: 1.5rem;

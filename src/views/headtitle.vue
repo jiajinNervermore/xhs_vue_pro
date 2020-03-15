@@ -120,13 +120,20 @@
   .font{
     font-size: 10px;
   }
+  /**头部样式 */
   .head{
+    position: fixed;/**固定定位 */
+    top:0;
+    background-color: #fff;
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    position: relative;
+    height: 3rem;
+    z-index: 10;
     align-items: center;
     padding: 3px;
   }
+  
   .head>div:nth-child(2){
     width: 80%;
   }

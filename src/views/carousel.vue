@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <div class="Product">
     <headtitle></headtitle>
     <div class="carousel" :style="{width:wd}">
@@ -11,41 +10,27 @@
         <div :style="{width:wd+'px'}" class="carousel-item">
           <img :src="url+list[0].img" alt />
         </div>
-=======
-<div>
-  <headtitle></headtitle>
-  <div class="carousel" :style="{width:wd}">
-    <!-- 轮播图片 -->
-    <div class="carousel-list" :style="ulStyle" :class="{transition:tran}">
-      <div :style="{width:wd+'px'}" class="carousel-item" v-for="(item,i) of list" :key="i">
-        <img v-if="item.img" :src="url+item.img" alt="">
-      </div>
-      <div :style="{width:wd+'px'}" class="carousel-item">
-        <img v-if="list[0].img" :src="url+list[0].img" alt="">
->>>>>>> xhs-2
-      </div>
       <!-- 点 -->
       <ul class="ul-list">
         <li class="li-dian" v-for="(d,i) of list" :key="i" :class="time==i?'active':''"></li>
       </ul>
     </div>
-<<<<<<< HEAD
+    </div>
     <second></second>
     <third></third>
     <timelimit></timelimit>
     <recommend></recommend>
     <!-- 购物车跳转组件 -->
     <shopping-cart @click="toShoppingCart"></shopping-cart>
-=======
-    <!-- 点 -->
-    <ul class="ul-list">
-      <li class="li-dian" v-for="(d,i) of list" :key="i" :class="{active:time==i}"></li>
-    </ul>
->>>>>>> xhs-2
   </div>
 </template>
 <style scoped>
-
+/**在头部下加一个空的块级元素以填充定位下方空余的位置 */
+/*.carousel::before{
+  content: "";
+  display: block;
+  height: 3rem;
+}*/
 .carousel {
   overflow: hidden;
   margin: 5px;

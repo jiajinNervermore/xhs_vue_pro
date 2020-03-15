@@ -1,16 +1,16 @@
 <template>
-  <div class="me" @click="show">
+  <div class="me" >
     <more class="more" :isClick="isClick"></more>
 
     <div class="header">
-      <img src="../../assets/sanheng.png" alt class="show" />
+      <img src="../../assets/sanheng.png" alt class="show" @click="shows"/>
       <div class="text-center">
         <h4 class="m-1">Nevermore</h4>
         <p>小红书号:79777777</p>
       </div>
       <img src="../../assets/fenxiang.png" alt />
     </div>
-    <div class="zzc"></div>
+    <div id="zhezhaoceng" class="fide" @click="fides"></div>
   </div>
 </template>
 <script>
@@ -25,25 +25,20 @@ export default {
   },
   methods: {
     // 显示更多按钮
-    show(e) {
-      var show = document.getElementsByClassName("show")[0];
-      //获取‘更多’元素
-      var mores = document.getElementsByClassName("more")[0];
+    shows() {
       // 获取遮罩层
-      var zzc = document.getElementsByClassName('zzc')[0];
-      console.log(e.target,mores)
-      if (e.target == show) {
-        this.isClick = true;
-        setTimeout(()=>{
-          zzc.style.display='block'
-        },200)
-        
-      } else if (e.target==zzc) {
-        this.isClick = false;
-        setTimeout(()=>{
-          zzc.style.display='none'
-        },200)
-      }
+      var zzc = document.getElementById('zhezhaoceng ');
+    console.log(zzc)
+      this.isClick = true;
+      setTimeout(() => {
+        zzc.classList.add("show")
+      }, 200);
+    },
+    fides() {
+      this.isClick = false;
+      setTimeout(() => {
+        zzc.classList.add("fide")
+      }, 200);
     }
   }
 };
@@ -53,12 +48,12 @@ export default {
   width: 100%;
 }
 /* 更多菜单样式 */
-.more {
+.me .more {
   width: 0;
 }
 
 /* 头部样式 */
-.header {
+.me .header {
   width: 100%; /**宽度 */
   height: 5rem; /**高度 */
   position: fixed; /**固定定位 */
@@ -71,16 +66,21 @@ export default {
   z-index: 1;
 }
 /* 遮罩层 */
-.zzc{
+.me #zhezhaoceng {
   /**宽高 */
-  width:100%;
+  width: 100%;
   height: 100%;
   opacity: 0.3;
   background-color: #000;
   position: absolute;
   z-index: 5;
-  display: none;
-  top:0;
+  top: 0;
   transition: all 0.2s linear;
+}
+.fide{
+  display: none;
+}
+.show{
+  display: block;
 }
 </style>
