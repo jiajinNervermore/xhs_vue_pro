@@ -20,7 +20,9 @@
         <mt-tab-container v-model="navActive">
           <mt-tab-container-item id="guanzhu">
             <!-- <mt-cell v-for="n in 10" title="tab1"></mt-cell> -->
-            <span>关注</span>
+            <div style="height:6rem;"></div>
+            <index-gz></index-gz>
+            <div style="height:4rem;"></div>
           </mt-tab-container-item>
           <mt-tab-container-item id="faxian">
             <!-- <mt-cell v-for="n in 5" title="tab-container 2"></mt-cell> -->
@@ -35,8 +37,12 @@
       <mt-tab-container-item id="shangcheng">
         <product></product>
       </mt-tab-container-item>
-      <mt-tab-container-item id="xiaoxi"></mt-tab-container-item>
-      <mt-tab-container-item id="wo"></mt-tab-container-item>
+      <mt-tab-container-item id="xiaoxi">
+        <message-all></message-all>
+      </mt-tab-container-item>
+      <mt-tab-container-item id="wo">
+      <me></me>
+      </mt-tab-container-item>
     </mt-tab-container>
     <div class="tabbar">
       <mt-tabbar v-model="active">
@@ -66,6 +72,10 @@ import fakeSearch from './common/fakesearch'
 import Product from '../../views/carousel'
 //引入消息组件
 import MessageAll from './messageall'
+//引入关注组件
+import IndexGz from '../../views/indexcq'
+//引入我组件
+import Me from './me'
 export default {
   data() {
     return {
@@ -105,6 +115,8 @@ export default {
     fakeSearch,
     Product,//商城组件
     MessageAll,//消息组件
+    IndexGz,//关注组件
+    Me,//我 组件
   }
 };
 </script>
@@ -119,8 +131,9 @@ export default {
   width:100%;/**宽度 */
   height: 6rem;/**高度 */
   border-bottom: 1px solid lightgray;
-  position: relative;
+  position: fixed;
   top:0;
+  z-index: 10;
   background-color: #fff;
 }
 /* 拍摄图标 按钮*/

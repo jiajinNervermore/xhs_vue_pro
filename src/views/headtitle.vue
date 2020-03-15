@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="store">
   <div class="head">
     <div class="other" @click="change">
       <img src="../assets/shopping/search/gengduo.png" alt="">
@@ -123,9 +123,19 @@
   .head{
     display: flex;
     justify-content: space-between;
-    position: relative;
+    position: fixed;
     align-items: center;
     padding: 3px;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    background-color: #fff;
+    height:4rem;
+  }
+  .store::before{
+    content:"";
+    display:block;
+    height: 4rem;
   }
   .head>div:nth-child(2){
     width: 80%;

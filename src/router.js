@@ -23,11 +23,9 @@ export default new Router({
     {path:"/users/shopping",component:shopping},
     {path:"/users/pay",component:pay}, 
     {path:"/users/me",component:me},
-    {path:"/carousel",component:Carousel},
     {path:"/index",component:index},
-    // {path:"/signin",component:register},
-    {path:"/indexcq",component:Indexcq},
-    {path:"/signin",component:register},
-    {path:"/carousel",component:Carousel}
-  ]
+    // {path:"/signin",component:register}
+    {path:'/',redirect:'/users/signin'} 
+  ],
+  mode:"history",
 })
