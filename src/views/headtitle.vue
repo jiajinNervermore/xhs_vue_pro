@@ -132,11 +132,6 @@
     background-color: #fff;
     height:4rem;
   }
-  .store::before{
-    content:"";
-    display:block;
-    height: 4rem;
-  }
   .head>div:nth-child(2){
     width: 80%;
   }

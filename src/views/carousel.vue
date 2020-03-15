@@ -1,6 +1,7 @@
 <template>
   <div class="Product">
     <headtitle></headtitle>
+    <div style="height:4rem;"></div>
     <div class="carousel" :style="{width:wd}">
       <!-- 轮播图片 -->
       <div class="carousel-list" :style="ulStyle" :class="{transition:tran}">
@@ -22,6 +23,7 @@
     <recommend></recommend>
     <!-- 购物车跳转组件 -->
     <shopping-cart @click="toShoppingCart"></shopping-cart>
+    <div style="height:3rem;"></div>
   </div>
 </template>
 <style scoped>

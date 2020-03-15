@@ -13,8 +13,8 @@ import me from "./components/xhs/me"
 // import register from './components/xhs/register.vue'
 //引入主页组件
 import index from './components/xhs/index.vue'
-import Carousel from './views/carousel'
-import Indexcq from './views/indexcq'
+import details from './components/xhs/details.vue'
+import body from './components/xhs/Child/body.vue'
 Vue.use(Router)//将路由对象注册
 //配置组件访问路径
 export default new Router({
@@ -25,7 +25,9 @@ export default new Router({
     {path:"/users/me",component:me},
     {path:"/index",component:index},
     // {path:"/signin",component:register}
-    {path:'/',redirect:'/users/signin'} 
+    {path:'/',redirect:'/users/signin'},
+    {path:"/details",component:details},
+    {path:"/body",component:body}
   ],
-  mode:"history",
+  mode:"history"
 })
