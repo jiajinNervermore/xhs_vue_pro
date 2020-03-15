@@ -3,7 +3,7 @@
      <!-- 价格 -->
      <div class="bodyf">
         <div class="rep"></div>
-        <div class="pic">￥138.9</div>
+        <div class="pic">{{data[0].price1}}</div>
         <sum bid="109.9" class="sum"></sum>
         <div class="bor">包邮</div>
         <div class="bor">包邮</div>
@@ -18,9 +18,13 @@
      <!-- 产品名称 -->
      <div class="bodyh">
        <div class="h1">新草</div>
-       <div class="h2">50片装</div>
+       <div class="h3">
+           <div>{{data[0].title}}</div>
+       </div>
+
+       <!-- <div class="h2">50片装</div>
        <div class="h3">.</div>
-       <div class="h2">口罩一次性使用过滤垫片</div>
+       <div class="h2">口罩一次性使用过滤垫片</div> -->
        <div class="h4">
          <div><img src="../../../assets/心愿单.png" alt="" width="30px"></div>
          <div>心愿单</div>
@@ -61,11 +65,30 @@
      </div>
       <!-- 灰色背景 -->
      <div class="back"></div>
+     <div class="bodym"><img src="../../../assets/lkzcjp.jpg" alt="" width="100%"></div>
    </div>
 </template>
 <script>
 import sum from './sum.vue'
 export default {
+  data(){
+    return {
+       data:[]
+    }
+  },
+  methods:{
+    lom(){
+       this.axios.get("/details").then(res=>{
+     this.data = res.data;
+     console.log(this.data)
+    }).catch(err=>{
+       console.log(err);
+    })
+    }
+  },
+  created(){
+    this.lom();
+  },
   components:{
     sum
   }
@@ -129,13 +152,10 @@ export default {
     line-height: 15px;
     color: #b3cd87;
   }
-  .bodyAll .bodyh .h2{
-    margin-left: 8px;
-    font-size: 0.9rem;
-  }
   .bodyAll .bodyh .h3{
-    margin:0 5px 0 10px;
-    font-size: 15px;
+    margin-left: 13px;
+    padding-top: 8px;
+    font-size: 13px;
     font-weight: bolder;
     padding-bottom: 8px;
     text-align: center;
@@ -199,7 +219,7 @@ export default {
     width: 100%;
     display: flex;
     margin-left: 13px;
-    padding: 13px 0;
+    padding: 11px 0;
   }
   .bodyAll .bodyl .l1{
     color: #c2c2c2;
@@ -211,5 +231,8 @@ export default {
   }
   .bodyAll .bodyl .l3{
     margin-left: 12.75rem;
+  }
+  .bodyAll .bodym{
+    width: 100%;
   }
 </style>

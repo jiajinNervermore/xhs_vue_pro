@@ -10,6 +10,11 @@ import titleTar from './Child/titleTar.vue'
 import baseTar from './Child/baseTar.vue'
 import body1 from './Child/body.vue'
 export default {
+  data(){
+    return {
+      
+    }
+  },
   components:{
     titleTar,baseTar,body1
   }

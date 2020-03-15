@@ -1,17 +1,37 @@
 <template>
     <div class="title">
-      <div class="tone"><img src="../../../assets/lkz.jpg" alt="" width="100%">
+      <div class="tone"><img :src="require(`../../../assets/${imags}`)" alt="" width="100%">
       </div>
       <div class="too"><img class="css" src="../../../assets/返 回.png" alt=""
         width="23px"></div>
       <div class="three"><img class="cs" src="../../../assets/分享.png" alt=""
         width="23px"></div>
       <div class="shi">1/3</div>
+      <div></div>
     </div>
 </template>
 <script>
 export default {
-  
+  data(){
+    return {
+     imags:""
+    }
+  },
+  methods:{
+    // lom(){
+     
+    // }
+  },
+  created(){
+    // console.log(imags)
+    
+     this.axios.get("/details").then(res=>{
+     this.imags = res.data[0].imags;
+    console.log(res.data[0].imags);
+    }).catch(err=>{
+      //  console.log(err);
+    })
+  }
 }
 </script>
 <style scoped>
