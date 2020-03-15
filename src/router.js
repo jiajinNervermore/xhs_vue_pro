@@ -13,21 +13,26 @@ import me from "./components/xhs/me"
 // import register from './components/xhs/register.vue'
 //引入主页组件
 import index from './components/xhs/index.vue'
-import details from './components/xhs/details.vue'
-import body from './components/xhs/Child/body.vue'
+// import details from './components/xhs/details.vue'
+// import body from './components/xhs/Child/body.vue'
 Vue.use(Router)//将路由对象注册
 //配置组件访问路径
 export default new Router({
-  routes:[
-    {path:"/users/signin",component:signin},
-    {path:"/users/shopping",component:shopping},
-    {path:"/users/pay",component:pay}, 
-    {path:"/users/me",component:me},
-    {path:"/index",component:index},
+  routes: [
+    { path: "/users/signin", component: signin },
+    { path: "/users/shopping", component: shopping },
+    { path: "/users/pay", component: pay },
+    { path: "/users/me", component: me },
+    { path: "/index", component: index },
     // {path:"/signin",component:register}
-    {path:'/',redirect:'/users/signin'},
-    {path:"/details",component:details},
-    {path:"/body",component:body}
+    { path: '/', redirect: '/users/signin' },
+    {
+      path: "/details/:lid",
+      name: 'details',
+      props: true,
+      // props:{lid:3},
+      component: () => import(/*webpackChunkName:"details"*/  './components/xhs/details.vue'), props: true
+    }
   ],
-  mode:"history"
+  mode: "history"
 })

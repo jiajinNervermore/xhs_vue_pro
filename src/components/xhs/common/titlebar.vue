@@ -1,53 +1,47 @@
 <template>
-    <div class="page-head">
-      <!--下方文字-->
-      <span>{{bottomTitle}}</span> 
-      <!--上方图片-->
-      <div class="top-pic">
-         <div class="searchdiv">
-             <img :src="FirstImg" style="width:25px;" />
-         </div>
-         <div class="searchdiv" style="margin-left:20px;">
-             <img :src="SecondImg"
-              style="width:25px;margin-right:15px;"/>
-         </div>
-         <div class="searchdiv" style="margin-left:20px;">
-             <img :src="ThirdImg"
-              style="width:25px;margin-right:15px;"/>
-         </div>
+  <div class="page-head">
+    <div class="top-pic">
+      <div class="searchdiv" v-for="(item,index) of bottomTitle" :key="index">
+        <!--上方图片-->
+        <p><img :src="require(`../../../assets/${item.url}`)" style="width:25px;" /></p>
+        <!--下方文字-->
+        <span>{{item.name}}</span>
       </div>
     </div>
+  </div>
 </template>
 <script>
 export default {
-    props:{ //声明接收父组件数据 
-      //下方文字
-      bottomTitle:{default:""},
-      //上方图片
-      FirstImg:{default:""},
-      SecondImg:{default:""},
-      ThirdImg:{default:""}
-    }
-}
+  return: {},
+  props: {
+    //声明接收父组件数据
+    //下方文字
+    bottomTitle: { default: "" }
+  }
+};
 </script>
 <style scoped>
+
+.searchdiv {
+  text-align: center;
+}
 /*1:外层父元素弹性布局*/
-.page-head{
-   display: flex;/*指定布局方式:弹性布局*/
-   position: fixed;/*固定定位*/
-   z-index: 999;/*显示元素上方*/
-   width: 100%;/*填满父无素*/
-   justify-content: space-between;/*子元素两端对齐*/
-   align-items: center;/*子元素垂直居中*/ 
-   background-color:#ccc;
-   padding-left:7px;/*内边距*/
-   padding-right:7px;
-   height:48px;/*元素高度*/
-   color:#dddddd;
-   font-size:18px;
+.page-head {
+ padding: 1rem;
+  background-color: #fff;
 }
 /*2:右侧元素弹性布局*/
-.top-pic{
-    display: flex;
+.top-pic {
+  display: flex;
+  justify-content: space-between;
+}
+img{
+    width:3rem;
+    height: 2rem;
+    
+}
+span{
+    font-size: 14px;
+    color:#000;
 }
 </style>

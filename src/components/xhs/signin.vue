@@ -179,8 +179,6 @@ a {
 /* 注册页面样式 */
 .register {
   margin-top: 1rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -194,6 +192,7 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 2rem;
 }
 /* 左箭头 返回 */
 .register .header img {

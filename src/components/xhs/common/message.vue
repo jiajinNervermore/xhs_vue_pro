@@ -21,7 +21,10 @@ export default {
       title:{default:""},//左侧标题      默认值空字符串
       subtitle:{default:""},//左侧子标题 默认值空字符串
       sendtime:{default:""}//发送时间    默认值空字符串
-    }
+    },
+    mounted() {
+        console.log(this.imgurl)
+    },
 }
 </script>
 <style scoped>

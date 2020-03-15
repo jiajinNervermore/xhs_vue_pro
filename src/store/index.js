@@ -7,6 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     uname: "",
+    count:0,
     moreList: [
       { title: "发现好友", img: "haoyou.png" }, 
       { title: "我的草稿", img: "caogao.png" }, 
@@ -24,7 +25,11 @@ export default new Vuex.Store({
   mutations: { //专门负责修改state中的变量
     setUname(state, uname) {
       state.uname = uname;
+    },
+    setCount(state,num){
+      state.count=num
     }
+
   },
   actions: { //专门负责发送异步ajax请求，从服务器端获取数据
     login(context, user) { //context代表整个vuex对象

@@ -28,9 +28,14 @@ export default {
 </script>
 <style>
   .baseSire{
+    
     width: 100%;
     display: flex;
     height: 50px;
+  }
+  .baseSire.c1{
+    position:fixed;
+    bottom: 0;
   }
   .baseSire .one{
     width: 40%;

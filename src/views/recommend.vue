@@ -4,7 +4,7 @@
       <li @click="changeActive(i)" :class="{active:l.isActive}" v-for="(l,i) of list" :key="i">{{l.title}}</li>
     </ul>
     <div class="spitem">
-      <spitem class="product" v-for="(item,i) of items" :key="i" :item="item"></spitem>
+      <spitem class="product" v-for="(item,i) of items" :key="i" :item="item" :i="item.lid"></spitem>
     </div>
   </div>
 </template>
