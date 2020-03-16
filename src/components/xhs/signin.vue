@@ -52,7 +52,7 @@
     </div>
     <div class="input_number_trans" id="inputs">
       <div v-for="(val,index) of number" :key="index" class="num">
-        <span>{{(index>8)?val:(index+1)}}</span>
+        <span :class="{jz:val==0}">{{(index>8)?val:(index+1)}}</span>
         <span>{{index==9?index="":val}}</span>
       </div>
       <div class="close_num_trans">
@@ -294,7 +294,7 @@ a {
 /* 手机号码输入框过渡效果 */
  .input_number_trans {
   width: 100%;
-  height: 18rem;
+  height: 15rem;
   position: fixed;
   bottom: 0;
   background-color: lightgray;
@@ -315,9 +315,14 @@ a {
   margin: 0.25rem;
   border-radius: 0.5rem;
   width: 30%;
+  height: 3rem;
+}
+/**0按钮居中 */
+.jz{
+  line-height: 3rem;
 }
  .num > span:first-child {
-  font-size: 2rem;
+  font-size: 1rem;
 }
 .num > span:last-child {
   font-size: 0.5rem;

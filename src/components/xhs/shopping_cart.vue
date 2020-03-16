@@ -1,21 +1,19 @@
 <template>
   <div class="shopping_cart">
-    
     <!-- 应用子组件shopping_cart_shop 添加商品栏 -->
-    <shop :list="list"></shop>
+    <shop :list="list" @changeCheck="changeCheck"></shop>
     <h4 class="text-center mt-4">猜你喜欢</h4>
     <div class="products">
       <product></product>
       <product></product>
     </div>
     <div class="footer">
-      <ul class="list-unstyled w-100">
+      <ul>
         <li>
           <img
             class="ml-2"
             :src="require(`../../assets/${is_checked ? 'gouSolid-copy.png' : 'yuanquan.png'}`)"
             @click="choose"
-            :is_checked="is_checked"
           />
           <span>全选</span>
         </li>
@@ -23,7 +21,7 @@
           <ul class="clear-cart list-unstyled">
             <li>
               <span>总计:</span>
-              <span class="text-danger">￥0</span>
+              <span class="text-danger">￥{{totalPrice}}</span>
               <p class="text-muted">免运费</p>
             </li>
             <li>
@@ -74,18 +72,80 @@ export default {
       ]
     };
   },
+  computed: {
+    //计算总的选中商品个数
+    totalPrice() {
+      let sum = 0;
+      let total = 0;
+      this.list.map(item => {
+        item.is_checked && sum++;
+        item.is_checked && (total += item.count * item.price);
+      });
+      return total;
+    }
+  },
   methods: {
+    //改变单个商品的选中状态（子传父）
+    changeCheck(i) {
+      //触发父组件定义的自定义事件
+      this.list[i].is_checked = !this.list[i].is_checked;
+      let sum = 0;
+      this.list.map(item => {
+        item.is_checked && sum++;
+      });
+      //子组件选中状态控制全选状态选中与否
+      sum == this.list.length
+        ? (this.is_checked = true)
+        : (this.is_checked = false);
+    },
+    //改变所有商品的选中状态
     choose() {
-      this.is_checked=!this.is_checked
+      this.list.map(item => {
+        item.is_checked = !item.is_checked;
+      });
+      this.is_checked = !this.is_checked;
     },
     // 结算按钮
-    clear(){
-      this.$router.push("/users/pay")
+    clear() {
+      if (this.totalPrice != 0) {
+        this.$router.push("/users/pay");
+      }
+    },
+    loadMore() {
+      // 1.创建变量url保存请求地址48
+      let url = "cart";
+      // 1.1修改页码Pno的值
+      // this.pno++;
+      // // 2，创建变量obj   请求服务器参数
+      // let obj = { pno: this.pno, pageSize: 5 };
+      //3.方法ajax请求
+      this.axios.get(url).then(res => {
+        console.log(res);
+        //3.1获取服务器返回数据 code == -2 提示请登录
+        if (res.data.code == -2) {
+          this.$router.push("/users/signin");
+        } else {
+          //3.2code == 1返回数据
+          this.list = res.data.data;
+          //遍历list并在其元素内（对象）添加一个属性isAgree 属性值为false
+          this.list.map(item => {
+            item.isAgree = false;
+          });
+          var sum = 0;
+          this.list.map(item => {
+            sum += item.count;
+          });
+          this.$store.commit("addCart", sum);
+        }
+      });
     }
   }
 };
 </script>
 <style scoped>
+ul {
+  list-style: none;
+}
 /* 购物车背景色 */
 .shopping_cart {
   background-color: #f5f5f5;
@@ -116,12 +176,12 @@ export default {
   display: flex;
 }
 /* 免运费 */
-.clear-cart>li>p{
-  margin-top:-3rem;
+.clear-cart > li > p {
+  margin-top: -3rem;
   font-size: 0.9rem;
   margin-left: 1.4rem;
 }
-.clear-cart>li>span{
+.clear-cart > li > span {
   margin-top: -20px !important;
 }
 /* 结算按钮 */

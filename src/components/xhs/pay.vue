@@ -35,14 +35,22 @@
       <div class="pay_method p-2 m-2">
         <span>支付方式</span>
         <div class="row no-gutters mb-2 align-items-center">
-          <span class="col-1"><img src="../../assets/umidd17.png" alt="" ></span>
+          <span class="col-1">
+            <img src="../../assets/umidd17.png" alt />
+          </span>
           <span class="col-8 offset-1">支付宝</span>
-          <span class="col-2 text-right" @click="zfb"><img :src="require(`../../assets/${pymd?'yuanquan.png':'gouSolid-copy.png'}`)" alt=""></span>        
+          <span class="col-2 text-right" @click="zfb">
+            <img :src="require(`../../assets/${pymd?'yuanquan.png':'gouSolid-copy.png'}`)" alt />
+          </span>
         </div>
         <div class="row no-gutters mb-2 align-items-center">
-          <span class="col-1"><img src="../../assets/weixinzhifu.png" alt="" ></span>
+          <span class="col-1">
+            <img src="../../assets/weixinzhifu.png" alt />
+          </span>
           <span class="col-8 offset-1">微信</span>
-          <span class="col-2 text-right" @click="wx"><img :src="require(`../../assets/${pymd?'gouSolid-copy.png':'yuanquan.png'}`)" alt=""></span>        
+          <span class="col-2 text-right" @click="wx">
+            <img :src="require(`../../assets/${pymd?'gouSolid-copy.png':'yuanquan.png'}`)" alt />
+          </span>
         </div>
       </div>
       <div class="m-2 p-2">
@@ -59,16 +67,23 @@
       </div>
       <div class="invoice m-2 p-2 row no-gutters">
         <span class="col-2">发票</span>
-        <span class="col-1"><img src="../../assets/i.png" alt=""></span>
+        <span class="col-1">
+          <img src="../../assets/i.png" alt />
+        </span>
         <span class="offset-5 col-3 text-muted">暂不开票</span>
-        <span><img src="../../assets/icon-r.png" alt=""></span>
+        <span>
+          <img src="../../assets/icon-r.png" alt />
+        </span>
       </div>
-      <p>点击支付则表示您同意&nbsp;<a href="javascript:;" class="text-dark know">&lt;&lt;用户购买须知&gt;&gt;</a></p>
+      <p>
+        点击支付则表示您同意&nbsp;
+        <a href="javascript:;" class="text-dark know">&lt;&lt;用户购买须知&gt;&gt;</a>
+      </p>
       <div class="footer row no-gutters">
         <span class="col-2 text-center">总计&nbsp;:</span>
         <span class="col-2">￥239</span>
         <div @click="pay" class="pay_off offset-4 col-4">
-          <span>抢先支付&nbsp;{{minute}}&nbsp;{{second}}</span>         
+          <span>抢先支付&nbsp;{{minute}}&nbsp;{{second}}</span>
         </div>
       </div>
     </div>
@@ -76,9 +91,9 @@
 </template>
 <script>
 //引入子组件  商品
-  import product from './shopping_cart/pay_product'
+import product from "./shopping_cart/pay_product";
 export default {
-  components:{product},
+  components: { product },
   data() {
     return {
       username: "",
@@ -89,59 +104,59 @@ export default {
       id: "",
       show_or_hide: false,
       value: false,
-      pymd:false,
-      count_down:"",
-      minutes:30,
-      seconds:0
+      pymd: false,
+      count_down: "",
+      minutes: 30,
+      seconds: 0
     };
   },
-  computed: { 
-     second: function () {
-        return this.num(this.seconds)
-      },
-      minute: function () {
-        return this.num(this.minutes)
-      }
+  computed: {
+    second: function() {
+      return this.num(this.seconds);
+    },
+    minute: function() {
+      return this.num(this.minutes);
+    }
   },
   mounted() {
-    this.add()
+    this.add();
   },
   watch: {
     second: {
-        handler (newVal) {
-          this.num(newVal)
-        }
-      },
-      minute: {
-        handler (newVal) {
-          this.num(newVal)
-        }
+      handler(newVal) {
+        this.num(newVal);
       }
+    },
+    minute: {
+      handler(newVal) {
+        this.num(newVal);
+      }
+    }
   },
   methods: {
     // 返回键
-    backToShoppingCart(){
-      this.$router.push('/users/shopping')
+    backToShoppingCart() {
+      this.$router.push("/users/shopping");
     },
-    num: function (n) {
-        return n < 10 ? '0' + n : '' + n
-      },
-      add: function () {
-        var _this = this
-        var time = setInterval(function () {
-          if (_this.seconds === 0 && _this.minutes !== 0) {
-            _this.seconds = 59
-            _this.minutes -= 1
-          } else if (_this.minutes === 0 && _this.seconds === 0) {
-            _this.seconds = 0
-            window.clearInterval(time)
-          } else {
-            _this.seconds -= 1
-          }
-        }, 1000)
-      },
-      
-      //粘贴板显示隐藏功能
+    num: function(n) {
+      return n < 10 ? "0" + n : "" + n;
+    },
+    add: function() {
+      var _this = this;
+      var time = setInterval(function() {
+        if (_this.seconds === 0 && _this.minutes !== 0) {
+          _this.seconds = 59;
+          _this.minutes -= 1;
+        } else if (_this.minutes === 0 && _this.seconds === 0) {
+          _this.seconds = 0;
+          window.clearInterval(time);
+        } else {
+          _this.seconds -= 1;
+        }
+      }, 1000);
+    },
+
+    //粘贴板显示隐藏功能
     change() {
       this.show_or_hide = !this.show_or_hide;
       copy.className == "show"
@@ -154,17 +169,21 @@ export default {
       text.value = "";
     },
     // 支付方法
-    zfb(){this.pymd=!this.pymd},
-    wx(){this.pymd=!this.pymd},
+    zfb() {
+      this.pymd = !this.pymd;
+    },
+    wx() {
+      this.pymd = !this.pymd;
+    },
     // 结算入口
-    pay(){
-      console.log("支付中...")
+    pay() {
+      console.log("支付中...");
     }
   }
 };
 </script>
 <style scoped>
-a{
+a {
   text-decoration: none;
 }
 /* 页头 */
@@ -192,6 +211,7 @@ a{
 }
 /* 粘贴板文本域 */
 #textar {
+  width: 90%;
   padding: 1rem;
   margin: 1rem;
   border: none;
@@ -210,7 +230,7 @@ a{
   font-size: 1rem;
 }
 /* 粘贴板清除按钮 */
- .pay .close {
+.pay .close {
   position: absolute;
   right: 7rem;
   bottom: 2.5rem;
@@ -231,7 +251,7 @@ a{
   color: #fff;
 }
 /* 页脚支付栏 */
-.pay .footer{
+.pay .footer {
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -240,20 +260,20 @@ a{
   height: 4rem;
   background-color: #fff;
   border-top: 1px solid lightgray;
-  padding-right:1rem; 
+  padding-right: 1rem;
   z-index: 20;
 }
-.pay .know:after{
+.pay .know:after {
   content: "";
   display: block;
   height: 4rem;
 }
 /* 支付按钮 */
-.pay .pay_off{
+.pay .pay_off {
   height: 2.5rem;
   text-align: center;
   background-color: #ff0033;
-  color:#fff;
+  color: #fff;
   border-radius: 1.5rem;
   padding: 0 1rem;
   line-height: 2.5rem;

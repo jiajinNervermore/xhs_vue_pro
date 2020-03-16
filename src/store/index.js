@@ -8,6 +8,8 @@ export default new Vuex.Store({
   state: {
     uname: "",
     count:0,
+    cartCount:0,
+    CartList:{},
     moreList: [
       { title: "发现好友", img: "haoyou.png" }, 
       { title: "我的草稿", img: "caogao.png" }, 
@@ -26,10 +28,16 @@ export default new Vuex.Store({
     setUname(state, uname) {
       state.uname = uname;
     },
+    setCartList(state,result){
+      state.CartList = result
+    },
     setCount(state,num){
       state.count=num
-    }
-
+    },
+    //保存购物车的数量,
+    subCart(state){state.cartCount--},
+    addCart(state,n){state.cartCount=n},
+    clearCart(state){state.cartCount=0}
   },
   actions: { //专门负责发送异步ajax请求，从服务器端获取数据
     login(context, user) { //context代表整个vuex对象
@@ -38,6 +46,12 @@ export default new Vuex.Store({
           params: user
         });
         context.commit("setUname", result.data.uname);
+      })()   
+    },
+    cart(context,uid){
+      (async function(){
+        var result = await axios.get('/cart',{params:uid});
+        context.commit('setCartList',result.data)
       })()
     }
   },
