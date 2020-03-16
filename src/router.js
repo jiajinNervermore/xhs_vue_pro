@@ -30,7 +30,7 @@ export default new Router({
       path: "/details/:lid",
       name: 'details',
       props: true,
-      // props:{lid:3},
+      props:(route)=>(route.query.lid),
       component: () => import(/*webpackChunkName:"details"*/  './components/xhs/details.vue'), props: true
     }
   ],

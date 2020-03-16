@@ -3,7 +3,7 @@
     <!-- 价格 -->
     <div class="bodyf">
       <div class="rep"></div>
-      <div class="pic">{{data[0].price}}</div>
+      <div class="pic">{{data.price}}</div>
       <sum bid="109.9" class="sum"></sum>
       <div class="bor">包邮</div>
       <div class="bor">包邮</div>
@@ -21,7 +21,7 @@
     <div class="bodyh">
       <div class="h1">新草</div>
       <div class="h3">
-        <div>{{data[3].title}}</div>
+        <div>{{data.title}}</div>
       </div>
 
       <!-- <div class="h2">50片装</div>
@@ -93,8 +93,8 @@ export default {
   props: ["lid"],
   data() {
     return {
-      data: [],
-      price: ""
+      data: {},
+      price: "",
     };
   },
   
@@ -105,7 +105,7 @@ export default {
       this.axios
         .get("/details",{params:obj})
         .then(res => {
-          // this.data = res.data; 
+          this.data = res.data[0]; 
           console.log(this.data);
         })
         .catch(err => {

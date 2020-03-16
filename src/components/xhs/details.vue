@@ -1,33 +1,41 @@
 <template>
   <div id="d1">
-    <titleTar></titleTar>
+    <titleTar :lid="lid"></titleTar>
     <baseTar class="c1"></baseTar>
-    <body1></body1>
+    <body1 :lid="lid"></body1>
   </div>
 </template>
 <script>
-import titleTar from './Child/titleTar.vue'
-import baseTar from './Child/baseTar.vue'
-import body1 from './Child/body.vue'
+import titleTar from "./Child/titleTar.vue";
+import baseTar from "./Child/baseTar.vue";
+import body1 from "./Child/body.vue";
 export default {
-  data(){
+  data() {
     return {
-      
-    }
+      lid: 0
+    };
   },
-  components:{
-    titleTar,baseTar,body1
+  created() {
+    let lid = parseInt(this.$route.params.lid);
+    this.lid = lid
+    console.log(this.lid);
+    console.log(lid);
+  },
+  components: {
+    titleTar,
+    baseTar,
+    body1
   }
-}
+};
 </script>
 <style>
- #d1{
-   width: 100%;
-   height: 40rem;
-   padding-bottom: 60px;
- }
- #d1>.c1{
-   position: fixed;
-   bottom: 0;
- }
+#d1 {
+  width: 100%;
+  height: 40rem;
+  padding-bottom: 60px;
+}
+#d1 > .c1 {
+  position: fixed;
+  bottom: 0;
+}
 </style>
