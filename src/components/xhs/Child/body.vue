@@ -1,9 +1,9 @@
 <template>
    <div class="bodyAll">
      <!-- 价格 -->
-     <div class="bodyf">
+     <div class="bodyf"> 
         <div class="rep"></div>
-        <div class="pic">{{data[0].price1}}</div>
+        <div class="pic">{{data.price}}</div>
         <sum bid="109.9" class="sum"></sum>
         <div class="bor">包邮</div>
         <div class="bor">包邮</div>
@@ -19,14 +19,14 @@
      <div class="bodyh">
        <div class="h1">新草</div>
        <div class="h3">
-           <div>{{data[0].title}}</div>
+           <div>{{data.title}}</div>
        </div>
 
        <!-- <div class="h2">50片装</div>
        <div class="h3">.</div>
        <div class="h2">口罩一次性使用过滤垫片</div> -->
        <div class="h4">
-         <div><img src="../../../assets/心愿单.png" alt="" width="30px"></div>
+         <div class="h5"><img src="../../../assets/心愿单.png" alt="" width="30px"></div>
          <div>心愿单</div>
        </div>
      </div>
@@ -43,13 +43,7 @@
        <div class="k1">
          <div><img src="../../../assets/gou1.jpg" alt="" width="20px"><span class="k3">7天保价</span></div>
          <div class="k2">
-           <div>领航奉献旗舰店发货</div>
-           <div><div class="k4">.</div></div>
-           <div>单件包邮</div>
-           <div><div class="k4">.</div></div>
-           <div>包税</div>
-           <div><div class="k4">.</div></div>
-           <div>7天无理由退款</div>
+           <div>领航奉献旗舰店发货 · 单件包邮 · 包税  · 7天无理由退款</div>
         </div>
        </div>
        <div class="k5"><img src="../../../assets/进入.png" alt="" width="25px"></div>
@@ -65,34 +59,53 @@
      </div>
       <!-- 灰色背景 -->
      <div class="back"></div>
-     <div class="bodym"><img src="../../../assets/lkzcjp.jpg" alt="" width="100%"></div>
+     <!-- <div class="bodym"><img src="../../../assets/lkzcjp.jpg" alt="" width="100%"></div> -->
    </div>
 </template>
 <script>
-import sum from './sum.vue'
+import sum from "./sum.vue";
 export default {
-  data(){
+  props: ["lid"],
+  data() {
     return {
-       data:[]
+      data: {},
+      price: "",
+    };
+  },
+  
+  methods: {
+    lom() {
+      var lid = parseInt(this.$route.params.lid)
+      var obj = {lid}
+      this.axios
+        .get("/details",{params:obj})
+        .then(res => {
+          this.data = res.data[0]; 
+          console.log(this.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   },
-  methods:{
-    lom(){
-       this.axios.get("/details").then(res=>{
-     this.data = res.data;
-     console.log(this.data)
-    }).catch(err=>{
-       console.log(err);
-    })
-    }
+  created() {
+    
   },
-  created(){
+  mounted() {
+    console.log(123)
+    console.log(this.lid)
     this.lom();
+    console.log(this.$route)
   },
-  components:{
+  watch: {
+    // lid(){
+    //   this.lom()
+    // }
+  },
+  components: {
     sum
   }
-}
+};
 </script>
 <style>
   .bodyAll .bodyf{
@@ -146,7 +159,6 @@ export default {
   .bodyAll .bodyh .h1{
     margin-left: 13px;
     border: 1px solid #b3cd87;
-    width: 22px;
     height: 15px;
     text-align: center;
     line-height: 15px;
@@ -164,6 +176,7 @@ export default {
     display: flex;
     flex-direction: column;
     margin-left: 3rem; 
+    text-align: center;
   }
   .bodyAll .bodyj{
     width: 100%;
@@ -195,6 +208,7 @@ export default {
     flex-direction: column;
   }
   .bodyAll .bodyk .k0{
+    width: 50px;
     font-size: 16px;
     color: #c2c2c2;
   }
@@ -202,24 +216,25 @@ export default {
     display: flex;
     padding-top: 5px;
     padding-bottom: 12px;
+    font-size: 10px;
   }
   .bodyAll .bodyk .k3{
     margin-left: 8px;
     font-size: 14px;
   }
-  .bodyAll .bodyk .k4{
+  /* .bodyAll .bodyk .k4{
      margin-top: -2.5px;
      font-weight: bolder;
      padding: 0 5px;
-  }
+  } */
   .bodyAll .bodyk .k5{
-    margin-left: 2rem;
+    margin-left: 1.8rem;
   }
   .bodyAll .bodyl{
     width: 100%;
     display: flex;
     margin-left: 13px;
-    padding: 11px 0;
+    padding: 10px 0;
   }
   .bodyAll .bodyl .l1{
     color: #c2c2c2;

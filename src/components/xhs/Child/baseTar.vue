@@ -1,6 +1,6 @@
 <template>
    <div class="baseSire">
-     <div class="one">
+     <div class="one"> 
        <div class="oneq">
          <div class="onee"><img src="../../../assets/客服.png" alt="" width="25rem" height="20rem"></div>
          <div class="onew">客服</div>
@@ -31,6 +31,8 @@ export default {
     width: 100%;
     display: flex;
     height: 50px;
+    padding:10px 0;
+    background-color: #fff;
   }
   .baseSire .one{
     width: 40%;
@@ -58,11 +60,13 @@ export default {
   .baseSire .oneq{
     display: flex;
     flex-direction: column;
+    text-align: center;
   }
   .baseSire .onew{
-    padding-top: 0.2rem;
+    /* padding-top: 0.2rem; */
     text-align: center;
     color: #adadad;
+    /* padding-bottom: 5px; */
   }
   .baseSire .onee{
     padding-top: 0.4rem;
