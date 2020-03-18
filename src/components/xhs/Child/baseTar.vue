@@ -14,16 +14,92 @@
          <div class="onew">购物车</div>
        </div>
      </div>
-     <div class="too">加入购物车</div>
+     <div class="too" @click="da">加入购物车</div>
      <div class="three">
        <div class="threeq">券后购买</div>
        <div class="threew">券后￥176.9</div>
      </div>
+     <mt-popup
+     v-model="popupVisible"
+     position="bottom">
+      <div class="alter" :style="{width:innerWidth+'px'}">
+         <div class="a1">
+          <div class="al"><img :src="`${url}/${imgs}`" alt="" width="100px"></div>
+          <div>
+            <div class="az">￥{{data.price}}</div>
+            <div class="am">已选:x6 5片/一袋</div>
+          </div>
+         </div>
+         <div class="a2">
+           <div class="a22">组合数量</div>
+           <div class="aone">
+             <div class="a23">2</div>
+             <div class="a24">6</div>
+           </div>
+         </div>
+         <div class="a2">
+           <div class="a22">款式</div>
+           <div class="a25">5片/袋</div>
+         </div>
+         <div class="a4">
+           <div class="c1">购买数量</div>
+           <div class="c2">
+             <div class="c3">-</div>
+             <div class="c4">1</div>
+             <div class="c5">+</div>
+           </div>
+         </div>
+         <div class="a5">确认加入</div>
+      </div>
+     </mt-popup>
    </div>
 </template>
 <script>
 export default {
-  
+   data(){
+     return {
+       popupVisible:false,
+       innerWidth:window.innerWidth,
+       url: "http://127.0.0.1:9527",
+       imgs: "",
+       data: {}
+     }
+   },
+   created(){
+     this.lom();
+    window.addEventListener("resize",()=>{
+      this.innerWidth=window.innerWidth;
+    })
+    var lid = parseInt(this.$route.params.lid);
+    var obj = { lid };
+    this.axios
+      .get("/details",{params:obj})
+      .then(res => {
+        this.imgs = res.data[0].details_pic;
+        console.log(this.imgs);
+      })
+      .catch(err => {
+        //  console.log(err);
+      });
+  },
+   methods:{
+     da(){
+       this.popupVisible = true;
+     },
+      lom() {
+      var lid = parseInt(this.$route.params.lid)
+      var obj = {lid}
+      this.axios
+        .get("/details",{params:obj})
+        .then(res => {
+          this.data = res.data[0]; 
+          console.log(this.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+   }
 }
 </script>
 <style>
@@ -79,4 +155,107 @@ export default {
   font-size: 0.7rem;
   padding-top: 0.2rem; 
   }
+  .baseSire .alter{
+    display: flex;
+    flex-direction: column;
+  }
+  .baseSire .alter .a1{
+    width: 100%;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    border-bottom: 1px solid #fcfcfc;
+  }
+  .baseSire .alter .a1 .al{
+    padding: 10px;
+  }
+  .baseSire .alter .a1 .az{
+    color: red;
+    padding-bottom: 4px;
+  }
+  .baseSire .alter .a1 .am{
+    padding-top: 4px;
+    font-size: 12px;
+  }
+  .baseSire .alter .a2 , .baseSire .alter .a3{
+    display: flex;
+    flex-direction: column;
+  }
+  .baseSire .alter .a2 {
+    border-bottom: 1px solid #fcfcfc;
+  }
+  .baseSire .alter .a2 .a22{
+    padding: 10px;
+    font-size: 14px;
+  }
+  .baseSire .alter .a2 .aone{
+    padding: 10px;
+    display: flex;
+  }
+  .baseSire .alter .a2 .a23{
+    width: 60px;
+    height: 25px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 25px;
+  }
+  .baseSire .alter .a2 .a24{
+    width: 60px;
+    height: 25px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 25px;
+    color: #ee7d8c;
+    background: #fff6f7;
+    margin-left: 30px;
+  }
+  .baseSire .alter .a2 .a25{
+    width: 60px;
+    height: 25px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 22px;
+    margin-left: 10px;
+    color: #ee7d8c;
+    background-color: #fff6f7;
+    font-size: 14px;
+  }
+  .baseSire .alter .a4{
+    display: flex;
+    justify-content: space-between;
+    padding:20px 0 0 10px;
+    margin-bottom:150px ;
+  }
+  .baseSire .alter .a4 .c2{
+    display: flex;
+  }
+  .baseSire .alter .a4 .c1{
+    font-size: 13px;
+  }
+   .baseSire .alter .a4 .c3,.baseSire .alter .a4 .c5{
+     /* padding-right: 18px; */
+     line-height: 18px;
+     text-align: center;
+     width: 20px;
+     height: 20px;
+     border-radius: 100%;
+     background-color: #f4f8fb;
+   }
+   .baseSire .alter .a4 .c5{
+     /* margin-left: 10px; */
+     margin-right: 10px;
+   }
+   .baseSire .alter .a4 .c4{
+     padding: 0 15px;
+   }
+   .baseSire .alter .a5{
+     width: 100%;
+     background-color: #ff2442;
+     color:#fff;
+     text-align: center;
+     padding: 15px 0;
+   }
 </style>

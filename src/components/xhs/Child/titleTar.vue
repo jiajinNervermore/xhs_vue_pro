@@ -23,11 +23,22 @@ export default {
   },
   props:['lid'],
   methods: {
-    // lom(){
-    // }
+   lom() {
+      var lid = parseInt(this.$route.params.lid)
+      var obj = {lid}
+      this.axios
+        .get("/details",{params:obj})
+        .then(res => {
+          this.data = res.data[0]; 
+          console.log(this.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   },
   created() {
-    console.log(this.lid)
+   this.lom();
     var lid = parseInt(this.$route.params.lid);
     var obj = { lid };
     this.axios
@@ -80,6 +91,5 @@ export default {
     font-size: 1rem;
     position: absolute;
     top: 80%;
-    left: 90%;
-    z-index: 999;}
+    left: 90%;}
 </style>
