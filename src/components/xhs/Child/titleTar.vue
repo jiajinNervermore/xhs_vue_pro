@@ -2,12 +2,14 @@
   <div class="title">
     <div class="too">
       <img class="css" src="../../../assets/返 回.png" alt width="23px" />
+       </div>
+       <div class="three"> 
       <img class="cs" src="../../../assets/分享.png" alt width="23px" />
     </div>
     <div class="shi">1/3</div>
     <div></div>
     <div class="tone">
-      <img :src="`${url}/${imgs}`" alt style="height:10rem;width:100%;" />
+      <img :src="`${url}/${imgs}`" alt style="width:100%;" />
     </div>
   </div>
 </template>
@@ -42,47 +44,42 @@ export default {
 </script>
 <style scoped>
 *{margin: 0;padding: 0;}
-
-.tone::before{
-  content:"";
-  display: block;
-  height:4rem;
-}
-/**商品图片 */
-.tone{
-  width:100%;
-}
-.too {
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  border-radius: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  position: fixed;
-  top: 0%;
-  left: 2.3%;
-}
-.three {
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  border-radius: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  position: absolute;
-  top: 3%;
-  left: 87%;
-}
-.cs {
-  margin-top: 5px;
-}
-.css {
-  margin-top: 7px;
-  margin-left: -3.5px;
-}
-.shi {
-  font-size: 1rem;
-  position: absolute;
-  left: 90%;
-  top: 90%;
-}
+   .title{
+    width: 100%;
+    position: relative;
+  }
+  .too{
+    position: fixed;
+   width: 40px;
+   height: 40px;
+   text-align: center;
+   border-radius: 100%;
+   background-color: rgba(0, 0, 0, 0.4);
+   top: 3%;
+   left: 2.3%;
+  }
+   .three{
+    position: fixed;
+   width: 40px;
+   height: 40px;
+   text-align: center;
+   border-radius: 100%;
+   background-color: rgba(0, 0, 0, 0.4);
+   /* position: absolute; */
+   top: 3%;
+   left: 87%;
+  }
+  .cs{
+    margin-top: 5px;
+  }
+  .css{
+     margin-top: 7px;
+    margin-left: -3.5px;
+  }
+  .shi{
+    font-size: 1rem;
+    position: absolute;
+    top: 80%;
+    left: 90%;
+    z-index: 999;}
 </style>

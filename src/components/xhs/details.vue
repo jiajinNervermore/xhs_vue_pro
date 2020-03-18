@@ -4,7 +4,7 @@
     <baseTar class="c1"></baseTar>
     <body1 :lid="lid"></body1>
   </div>
-</template>
+</template> 
 <script>
 import titleTar from "./Child/titleTar.vue";
 import baseTar from "./Child/baseTar.vue";
@@ -29,10 +29,11 @@ export default {
 };
 </script>
 <style>
+*{padding: 0;margin: 0;}
 #d1 {
   width: 100%;
-  height: 40rem;
-  padding-bottom: 60px;
+  height: 745px;
+  overflow: hidden;
 }
 #d1 > .c1 {
   position: fixed;
