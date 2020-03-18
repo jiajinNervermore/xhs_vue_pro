@@ -19,9 +19,6 @@ export default {
   computed: {
     ...mapState(["moreList"])
   },
-  mounted() {
-    console.log(this.moreList);
-  },
   updated() {
     console.log(this.isClick);
   }

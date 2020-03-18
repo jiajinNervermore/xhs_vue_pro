@@ -65,6 +65,9 @@
 </template>
 <script>
 import Vue from "vue";
+//引入vuex里面的属性方法
+import {mapMutations} from "vuex"
+//自动获取焦点
 Vue.directive("focus", {
   inserted(domElem) {
     //让当前元素自动获得焦点
@@ -73,8 +76,10 @@ Vue.directive("focus", {
   }
 });
 export default {
+  
   data() {
     return {
+      result:{},//保存用户信息
       count_down: 60,
       phone: "",
       verification_code: "",
@@ -83,6 +88,8 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(['setUser']),
+    // 获取验证号码倒计时
     getvfc(e) {
       e.target.style.display = "none";
       e.target.nextElementSibling.style.display = "block";
@@ -95,6 +102,7 @@ export default {
       this.axios
         .get(url, { params: obj })
         .then(res => {
+          // 获取验证码
           this.verification_code = res.data.obj.verification_code;
           var message = document.getElementsByClassName("message_vc")[0]
           message.style.display="block"
@@ -111,16 +119,22 @@ export default {
         }
       }, 60000);
     },
+    // 登录请求
     login() {
       var url = "/users/login";
+      // 设置请求参数，电话号码，验证码
       var obj = {
         phone: this.phone,
         verification_code: this.verification_code
       };
+      // 登录请求
       this.axios.get(url, { params: obj }).then(res => {
         console.log(res);
         if (res.data.code == 1) {
           this.$toast("登录成功");
+          console.log(res)
+          this.result = res.data.data[0];
+          this.setUser(this.result);
           // 跳转到主页
           this.$router.push('/index')
           return;
@@ -132,6 +146,7 @@ export default {
   },
   watch: {
     phone() {
+      // 监听手机号码输入框然后根据是否符合要求显示隐藏获取验证号码
       var reg = /^1[3-9]\d{9}$/i;
       var phone = this.phone;
       var verification = document.getElementsByClassName("verification")[0];

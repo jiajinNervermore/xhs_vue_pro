@@ -12,14 +12,7 @@
 export default {
   data(){
     return {}
-  },
-  created(){
-    // this.bus.$on("product-list",this.add.bind(this))
-    console.log(1)
-  },
-  methods: {
-    // choose(i){console.log(i)}
-  },
+  }
 };
 </script>
 <style scoped>

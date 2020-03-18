@@ -38,12 +38,15 @@
 import shop from "./shopping_cart/shopping_cart_shop.vue";
 //引入猜你喜欢栏---商品列表模块
 import product from "./product.vue";
-
+//引入vuex属性方法
+import { mapState, mapMutations } from "vuex";
+import { mapActions } from "vuex";
 export default {
   components: { shop, product },
   data() {
     return {
       is_checked: false,
+      uid: 0,
       list: [
         {
           store: "兰蔻",
@@ -72,6 +75,20 @@ export default {
       ]
     };
   },
+  created() {
+    // 根据vuex保存的用户信息，取出用户编号，查询用户购物车信息
+    this.uid = this.result.uid;
+    console.log(this.uid);
+    // this.cart({uid:this.uid});
+    console.log(this.CartList);
+    var obj = { uid: this.uid };
+    this.axios
+      .get("cart", { params: obj })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err));
+  },
   computed: {
     //计算总的选中商品个数
     totalPrice() {
@@ -82,9 +99,17 @@ export default {
         item.is_checked && (total += item.count * item.price);
       });
       return total;
-    }
+    },
+    ...mapState(["result", "CartList"]) //取出用户信息，和购物车信息
   },
   methods: {
+    //取出vuex中保存的异步请求方法
+    ...mapActions([
+      //去vuex的actions中取出名为login的函数放到此地
+      "cart" //,cart(context,uid)
+    ]),
+    ...mapMutations(["setCartList"]),
+    //setUname(uname){ this.$store.commit("setName",uanme) }
     //改变单个商品的选中状态（子传父）
     changeCheck(i) {
       //触发父组件定义的自定义事件

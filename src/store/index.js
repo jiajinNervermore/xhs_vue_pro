@@ -6,10 +6,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    result:{},//保存用户信息
     uname: "",
     count:0,
     cartCount:0,
-    CartList:{},
+    CartList:{},//用户购物车信息
     moreList: [
       { title: "发现好友", img: "haoyou.png" }, 
       { title: "我的草稿", img: "caogao.png" }, 
@@ -25,14 +26,20 @@ export default new Vuex.Store({
       { title: "设置", img: "shezhi.png" }]
   },
   mutations: { //专门负责修改state中的变量
+    // 无意义，只是一个示例
     setUname(state, uname) {
       state.uname = uname;
     },
+    // 用户购物车列表
     setCartList(state,result){
       state.CartList = result
     },
     setCount(state,num){
       state.count=num
+    },
+    // 设置用户信息
+    setUser(state,result){
+      state.result = result;
     },
     //保存购物车的数量,
     subCart(state){state.cartCount--},
@@ -48,10 +55,12 @@ export default new Vuex.Store({
         context.commit("setUname", result.data.uname);
       })()   
     },
+    // 购物车请求函数
     cart(context,uid){
       (async function(){
         var result = await axios.get('/cart',{params:uid});
-        context.commit('setCartList',result.data)
+        context.commit('setCartList',result.data);
+        console.log(result)
       })()
     }
   },

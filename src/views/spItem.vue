@@ -19,10 +19,8 @@ export default {
       url:"http://127.0.0.1:9527/"
     }
   },
-  props:["item","i"],
-  mounted() {
-    console.log(this.i)
-  },
+  props:["item","i"]
+  
 }
 </script>
 <style scoped>
