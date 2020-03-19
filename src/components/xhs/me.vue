@@ -55,12 +55,16 @@ export default {
   height: 100%;
 }
 /* 更多菜单样式 */
+.me .more {
+  height: 100%;
+}
+/* 更多菜单样式 */
 .more {
   width: 0;
 }
 
 /* 头部样式 */
-.header {
+.me .header {
   width: 100%; /**宽度 */
   height: 5rem; /**高度 */
   position: fixed; /**固定定位 */

@@ -54,7 +54,6 @@ export default {
 .more {
   position: fixed; /**固定定位 */
   width: 0; /**宽度 */
-
   z-index: 10; /**定位层级 */
   left: -80%; /**以左边为参考位置偏移0 */
   background-color: #fff;
@@ -81,7 +80,6 @@ export default {
   top: 0; /**定位以上面为参考边界偏移0 */
   left: -80%;
   background-color: #fff;
-
   transition: all 0.2s linear;
 }
 /**头部样式隐藏部分 */

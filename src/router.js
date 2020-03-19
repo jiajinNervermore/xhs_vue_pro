@@ -7,8 +7,6 @@ import shopping from './components/xhs/shopping_cart'
 //引入自定义组件 支付页面
 import pay from './components/xhs/pay'
 
-// 引入我的组件
-import me from "./components/xhs/me"
 //引入自定义组件
 // import register from './components/xhs/register.vue'
 //引入主页组件
@@ -22,7 +20,6 @@ export default new Router({
     { path: "/users/signin", component: signin },
     { path: "/users/shopping", component: shopping },
     { path: "/users/pay", component: pay },
-    { path: "/users/me", component: me },
     { path: "/index", component: index },
     // {path:"/signin",component:register}
     { path: '/', redirect: '/users/signin' },

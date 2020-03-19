@@ -11,7 +11,7 @@ export default {
 </script>
 <style scoped>
   .line{
-    position: relative !important  ;
+    position: relative !important;
   }
   .lines{
     position: absolute !important  ;

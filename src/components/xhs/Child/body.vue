@@ -3,8 +3,8 @@
      <!-- 价格 -->
      <div class="bodyf"> 
         <div class="rep"></div>
-        <div class="pic">{{data.price}}</div>
-        <sum bid="109.9" class="sum"></sum>
+        <div class="pic">￥{{data.price}}</div>
+        <!-- <sum bid="109.9" class="sum"></sum> -->
         <div class="bor">包邮</div>
         <div class="bor">包邮</div>
      </div>
@@ -134,6 +134,7 @@ export default {
   .bodyAll .sum{
     /* margin-top: -1rem; */
     margin-left: 0.2rem;
+    z-index: 0;
   }
   .bodyAll .bodyg{
     width: 100%;
@@ -160,8 +161,9 @@ export default {
     margin-left: 13px;
     border: 1px solid #b3cd87;
     height: 15px;
+    font-size: 13px;
     text-align: center;
-    line-height: 15px;
+    line-height: 14px;
     color: #b3cd87;
   }
   .bodyAll .bodyh .h3{
