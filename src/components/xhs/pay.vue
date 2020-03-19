@@ -31,7 +31,7 @@
         <span>设置为默认地址</span>
         <mt-switch v-model="value"></mt-switch>
       </div>
-      <product></product>
+      <product v-for="(item,i) of carts" :key="i" :pic="item.details_pic" :count="item.count" :store="item.store" :title="item.title" :price="item.price" :keyword="item.key_word"></product>
       <div class="pay_method p-2 m-2">
         <span>支付方式</span>
         <div class="row no-gutters mb-2 align-items-center">
@@ -61,6 +61,7 @@
           </li>
           <li class="d-flex justify-content-between">
             <span>满减优惠</span>
+            <span>{{total}}</span>
             <span class="text-danger">-￥30</span>
           </li>
         </ul>
@@ -81,7 +82,7 @@
       </p>
       <div class="footer row no-gutters">
         <span class="col-2 text-center">总计&nbsp;:</span>
-        <span class="col-2">￥239</span>
+        <span class="col-2">￥{{total}}</span>
         <div @click="pay" class="pay_off offset-4 col-4">
           <span>抢先支付&nbsp;{{minute}}&nbsp;{{second}}</span>
         </div>
@@ -92,6 +93,7 @@
 <script>
 //引入子组件  商品
 import product from "./shopping_cart/pay_product";
+import {mapState} from 'vuex';
 export default {
   components: { product },
   data() {
@@ -107,13 +109,35 @@ export default {
       pymd: false,
       count_down: "",
       minutes: 30,
-      seconds: 0
+      seconds: 0,
+      carts:[]//用一个变量保存购物车选中的商品
     };
   },
+  created() {
+    console.log(this.CartList)
+    //如果是选中状态才让它显示
+    this.CartList.map(item=>{
+      if(item.is_checked){
+        this.carts.push(item)
+      }
+    })
+  },
   computed: {
-    second: function() {
-      return this.num(this.seconds);
+    //总价:total
+    total(){
+      var total = 0
+      this.CartList.map(item=>{
+        if(item.is_checked){
+          total+=item.price*item.count
+        }
+        return total
+      })
     },
+    second: function() {
+      return this.num(this.seconds)
+      
+    },
+    ...mapState(['CartList']),
     minute: function() {
       return this.num(this.minutes);
     }

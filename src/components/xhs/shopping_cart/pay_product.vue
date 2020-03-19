@@ -1,33 +1,29 @@
 <template>
 <!-- 支付页面商品详情 -->
-  <div class="product m-2">
+  <div class="product m-2" >
     <ul class="list-unstyled m-2">
       <li>
         <img src="../../../assets/dianpu.png" alt />
-        <span>谷雨官方旗舰店</span>
+        <span>{{store}}官方旗舰店</span>
       </li>
       <li class="d-flex p-2 row no-gutters">
         <div class="col-4 text-center">
-          <img src="../../../assets/75c3e526add87fdd.jpg" alt />
+          <img :src="url+pic" alt />
         </div>       
         <ul class="list-unstyled col-8">
           <li class="d-flex">
             <div class="product_desc">
             <span class="timer_shopping">限时购</span>
-            <span class="mr-1">谷雨</span>
-            <span class="mr-1">仙人掌舒缓保湿面膜</span>
+            <span class="mr-1">{{store}}</span>
+            <span class="mr-1">{{title}}</span>
             </div>
-            <span class="count">x&nbsp;1</span>
-          </li>
-          <li>
-            <span class="text-muted mr-1">16片/2盒</span>
-            <span class="text-muted">粉绿各一盒</span>
+            <span class="count">x&nbsp;{{count}}</span>
           </li>
           <li>
             <span class="text-danger ">该商品已享受限时购，限购3件，不可使用薯券</span>
           </li>
           <li>
-            <span>￥95</span>
+            <span>￥{{price}}</span>
           </li>
         </ul>
       </li>
@@ -39,13 +35,25 @@
       <li class="d-flex justify-content-end">
         <span class="text-muted">共一件</span>
         <span class="mr-2 ml-2">小计 :</span>
-        <span class="text-danger">￥409</span>
+        <span class="text-danger">￥{{price*count}}</span>
       </li>
     </ul>
   </div>
 </template>
 <script>
-export default {};
+//引入vux state中的购物车数据
+
+export default {
+  created(){
+    console.log(this.pic,this.count,this.price);
+  },
+  props:['pic','title','count','keyword','store','price'],
+  data(){
+    return {
+      url :'http://127.0.0.1:9527/'
+    }
+  }
+};
 </script>
 <style scoped>
 /* 商品样式 */

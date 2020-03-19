@@ -1,7 +1,7 @@
 <template>
   <div class="shopping_cart">
     <!-- 应用子组件shopping_cart_shop 添加商品栏 -->
-    <shop :list="list" @changeCheck="changeCheck"></shop>
+    <shop :list="carts" @changeCheck="changeCheck"></shop>
     <h4 class="text-center mt-4">猜你喜欢</h4>
     <div class="products">
       <product></product>
@@ -47,32 +47,7 @@ export default {
     return {
       is_checked: false,
       uid: 0,
-      list: [
-        {
-          store: "兰蔻",
-          count: 1,
-          detail: "保湿水",
-          capacity: "150ml",
-          inventory: 10,
-          price: 259,
-          is_activity: true,
-          special_offer: "满300减30元",
-          pic: "e61865991d0c4e19.jpg",
-          is_checked: false
-        },
-        {
-          store: "谷雨",
-          count: 1,
-          detail: "面膜",
-          capacity: "150ml",
-          inventory: 10,
-          price: 409,
-          is_activity: true,
-          special_offer: "满300减30元",
-          pic: "e61865991d0c4e19.jpg",
-          is_checked: false
-        }
-      ]
+      carts: []
     };
   },
   created() {
@@ -80,12 +55,22 @@ export default {
     this.uid = this.result.uid;
     console.log(this.uid);
     // this.cart({uid:this.uid});
-    console.log(this.CartList);
+
     var obj = { uid: this.uid };
     this.axios
       .get("cart", { params: obj })
       .then(res => {
-        console.log(res);
+        if (res.data.code == 1) {
+          // 强行赋值两个变量，is_checked代表是否选中，is_activity代表是否有促销打折活动
+          res.data.data.map(item => {
+            item.is_checked = false;
+            item.is_activity = true;
+          });
+          //将最后的结果赋值给carts
+          this.carts = res.data.data;
+          console.log(this.carts);
+          this.$store.commit("setCartList", this.carts);
+        }
       })
       .catch(err => console.log(err));
   },
@@ -94,7 +79,7 @@ export default {
     totalPrice() {
       let sum = 0;
       let total = 0;
-      this.list.map(item => {
+      this.carts.map(item => {
         item.is_checked && sum++;
         item.is_checked && (total += item.count * item.price);
       });
@@ -113,19 +98,20 @@ export default {
     //改变单个商品的选中状态（子传父）
     changeCheck(i) {
       //触发父组件定义的自定义事件
-      this.list[i].is_checked = !this.list[i].is_checked;
+      this.carts[i].is_checked = !this.carts[i].is_checked;
       let sum = 0;
-      this.list.map(item => {
+      this.carts.map(item => {
         item.is_checked && sum++;
       });
       //子组件选中状态控制全选状态选中与否
-      sum == this.list.length
+      sum == this.carts.length
         ? (this.is_checked = true)
         : (this.is_checked = false);
+      
     },
     //改变所有商品的选中状态
     choose() {
-      this.list.map(item => {
+      this.carts.map(item => {
         item.is_checked = !item.is_checked;
       });
       this.is_checked = !this.is_checked;
@@ -135,34 +121,6 @@ export default {
       if (this.totalPrice != 0) {
         this.$router.push("/users/pay");
       }
-    },
-    loadMore() {
-      // 1.创建变量url保存请求地址48
-      let url = "cart";
-      // 1.1修改页码Pno的值
-      // this.pno++;
-      // // 2，创建变量obj   请求服务器参数
-      // let obj = { pno: this.pno, pageSize: 5 };
-      //3.方法ajax请求
-      this.axios.get(url).then(res => {
-        console.log(res);
-        //3.1获取服务器返回数据 code == -2 提示请登录
-        if (res.data.code == -2) {
-          this.$router.push("/users/signin");
-        } else {
-          //3.2code == 1返回数据
-          this.list = res.data.data;
-          //遍历list并在其元素内（对象）添加一个属性isAgree 属性值为false
-          this.list.map(item => {
-            item.isAgree = false;
-          });
-          var sum = 0;
-          this.list.map(item => {
-            sum += item.count;
-          });
-          this.$store.commit("addCart", sum);
-        }
-      });
     }
   }
 };

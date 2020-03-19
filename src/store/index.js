@@ -10,7 +10,7 @@ export default new Vuex.Store({
     uname: "",
     count:0,
     cartCount:0,
-    CartList:{},//用户购物车信息
+    CartList:[],//用户购物车信息
     moreList: [
       { title: "发现好友", img: "haoyou.png" }, 
       { title: "我的草稿", img: "caogao.png" }, 

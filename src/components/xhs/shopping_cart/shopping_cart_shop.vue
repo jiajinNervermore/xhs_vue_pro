@@ -39,7 +39,7 @@
         <div class="store_activity">
           <div class="ml-5">
             <span class="cross_store mr-2">跨店每满减</span>
-            <span>{{item.is_activity?item.special_offer:""}}</span>
+            <span>{{item.is_activity?"满300减30元":""}}</span>
           </div>
           <a href="javascript:;" class="luck">
             去凑单
@@ -54,13 +54,13 @@
           />
           <div class="desc">
             <a href="javascript:;">
-              <img :src="require(`../../../../public/img/e61865991d0c4e19.jpg`)" alt />
+              <img :src="url+item.details_pic" alt />
             </a>
           </div>
           <div class="product-details">
             <p>{{item.store}}</p>
-            <p>{{item.detail}}</p>
-            <p>{{item.capacity}}</p>
+            <p>{{item.title}}</p>
+            <p>{{item.parameter}}</p>
             <div class="d-flex justify-content-around">
               <span class="text-danger">￥{{item.price}}</span>
               <button @click="change(-1,i)">-</button>
@@ -77,13 +77,19 @@
 export default {
   props: ["list"],
   data() {
-    return {};
+    return {
+      url:'http://127.0.0.1:9527/'
+    };
   },
- 
+
   methods: {
     // 返回商城
     backToStore() {
+      // 兄弟传参：修改首页的active默认值
+      this.bus.$emit("backToStore");
+      // // setTimeout(()=>{},100)
       this.$router.push("/index");
+     
     },
     changeCheck(i) {
       this.$emit("changeCheck", i);

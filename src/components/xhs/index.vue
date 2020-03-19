@@ -3,7 +3,9 @@
     <mt-tab-container v-model="active">
       <mt-tab-container-item id="shouye">
         <div class="index_header">
-          <span class="media"><img src="../../assets/IMG.png" alt=""></span>
+          <span class="media">
+            <img src="../../assets/IMG.png" alt />
+          </span>
           <mt-navbar v-model="navActive">
             <mt-tab-item id="guanzhu">
               <span>关注</span>
@@ -41,7 +43,7 @@
         <message-all></message-all>
       </mt-tab-container-item>
       <mt-tab-container-item id="wo">
-      <me></me>
+        <me></me>
       </mt-tab-container-item>
     </mt-tab-container>
     <div class="tabbar">
@@ -67,19 +69,18 @@
 </template>
 <script>
 // 引入的搜索框
-import fakeSearch from './common/fakesearch'
+import fakeSearch from "./common/fakesearch";
 //引入的商城组件
-import Product from '../../views/carousel'
+import Product from "../../views/carousel";
 //引入消息组件
-import MessageAll from './messageall'
+import MessageAll from "./messageall";
 //引入关注组件
-import IndexGz from '../../views/indexcq'
+import IndexGz from "../../views/indexcq";
 //引入我组件
-import Me from './me'
+import Me from "./me";
 export default {
   data() {
     return {
-      active: "message", //默认消息列表组件显示
       list: [
         { isSelect: true }, //第一个按钮状态 0
         { isSelect: false }, //第二个按钮状态 1
@@ -90,60 +91,58 @@ export default {
       navActive: "guanzhu"
     };
   },
+  created() {
+    // 通过bus.js监听自定义函数，一旦有人触发，那么久执行后面这个方法
+    this.bus.$on("backToStore", this.backToStore.bind(this));
+  },
+  beforeMount() {
+    // this.backToStore();
+  },
   methods: {
-    changeState(idx) {
-      //功能:完成点击按钮切换图片任务 当前按钮true 其它按钮false
-      ///参数idx按钮下标 0 1 2 3
-      //1:创建变量size 表示数组长度
-      var size = this.list.length;
-      //2:创建循环遍历数据list每个元素
-      for (var i = 0; i < size; i++) {
-        //3:判断如果参数下载idx与当前按钮下标相同
-        if (i == idx) {
-          this.list[i].isSelect = true;
-        } else {
-          this.list[i].isSelect = false;
-        }
-        //4:当前元素选中状态true
-        //5:其它元素默认状态false
-      }
+    // 购物车返回到index 组件时，改变默认首页为商城
+    backToStore() {
+      this.active = "shangcheng";
+      console.log("触发成功", this.active);
+      var parent = document.getElementsByClassName('mint-tab-container-item')
+      console.log(parent);
     }
   },
   //2:注册顶部标题子组件
   components: {
     //指定标签名称:子组件对象
     fakeSearch,
-    Product,//商城组件
-    MessageAll,//消息组件
-    IndexGz,//关注组件
-    Me,//我 组件
+    Product, //商城组件
+    MessageAll, //消息组件
+    IndexGz, //关注组件
+    Me //我 组件
   }
 };
 </script>
 <style scoped>
 /* 首页总样式 */
-.index_all{
+.index_all {
   text-align: center;
   /* background-color: #fff; */
 }
 /* 首页头部 */
-.index_all .index_header{
-  width:100%;/**宽度 */
-  height: 6rem;/**高度 */
+.index_all .index_header {
+  width: 100%; /**宽度 */
+  height: 6rem; /**高度 */
   border-bottom: 1px solid lightgray;
   position: fixed;
-  top:0;
+  top: 0;
   z-index: 10;
   background-color: #fff;
 }
 /* 拍摄图标 按钮*/
-.index_all .media{
-  
+.index_all .media {
   position: absolute;
-  top:0;left:0;
+  top: 0;
+  left: 0;
 }
-.media img{
-  width:3rem;height:3rem;
+.media img {
+  width: 3rem;
+  height: 3rem;
 }
 /* 顶部导航栏样式 */
 .mint-navbar .mint-tab-item-label {
@@ -189,8 +188,8 @@ export default {
 }
 .mint-tabbar {
   height: 3rem;
-  position: fixed;/**固定定位 */
-  bottom:0;/**定位在下方 */
+  position: fixed; /**固定定位 */
+  bottom: 0; /**定位在下方 */
 }
 /**默认底部导航栏内边距清零 */
 .mint-tab-item {
@@ -222,7 +221,7 @@ export default {
   font-size: 25px; /**选中字体变大 */
 }
 /* 底部导航栏清除外边距 */
-.mint-tabbar .mint-tab-item-icon{
+.mint-tabbar .mint-tab-item-icon {
   margin: 0 !important;
 }
 </style>
