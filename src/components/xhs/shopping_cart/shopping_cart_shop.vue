@@ -27,7 +27,7 @@
             <img
               class="ml-2"
               :src="require(`../../../assets/${item.is_checked ? 'gouSolid-copy.png' : 'yuanquan.png'}`)"
-              @click="choose(i)"
+              @click="changeCheck(i)"
             />
             <a href="javascript:;">
               <img class="store_icon mr-1 ml-1" src="../../../assets/dianpu.png" alt />
@@ -49,7 +49,7 @@
         <div class="describe">
           <img
             :src="require(`../../../assets/${item.is_checked ? 'gouSolid-copy.png' : 'yuanquan.png'}`)"
-            @click="choose(i)"
+            @click="changeCheck(i)"
             class="ml-2"
           />
           <div class="desc">
@@ -79,14 +79,14 @@ export default {
   data() {
     return {};
   },
+ 
   methods: {
     // 返回商城
-    backToStore(){
-      this.$router.push('/index')
+    backToStore() {
+      this.$router.push("/index");
     },
-    choose(i) {
-      this.list[i].is_checked = !this.list[i].is_checked;
-      // this.bus.$emit("product-list", this.list);     
+    changeCheck(i) {
+      this.$emit("changeCheck", i);
     },
     change(n, i) {
       if (this.list[i].count == 1 && n == -1) {
@@ -194,6 +194,7 @@ a {
 /* 所有商品 */
 .goodsAll {
   background-color: #fff;
+  width: 100%;
 }
 /* 商品列表 */
 .goods {

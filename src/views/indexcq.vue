@@ -1,6 +1,5 @@
 <template>
-  <div class="cq" id="index_cq">
-  <div class="herder"></div>
+  <div class="cq">
     <div class="main" v-for="(item,i) of list" :key="i">
       <img v-if="item.video" :src="url+item.video" alt="">
       <span>{{item.title}}</span>
@@ -15,7 +14,6 @@
         </div>
       </div>
     </div>
-    <div class="footer"></div>
   </div>
 </template>
 <style scoped>

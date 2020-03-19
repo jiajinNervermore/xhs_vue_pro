@@ -1,16 +1,16 @@
 <template>
-  <div class="me" >
+  <div class="me">
     <more class="more" :isClick="isClick"></more>
 
     <div class="header">
-      <img src="../../assets/sanheng.png" alt class="show" @click="shows"/>
+      <img src="../../assets/sanheng.png" alt class="show" @click="show" />
       <div class="text-center">
         <h4 class="m-1">Nevermore</h4>
         <p>小红书号:79777777</p>
       </div>
-      <img src="../../assets/fenxiang.png" alt />
+      <img src="../../assets/fenxiang.png" alt @click="hide" />
     </div>
-    <div id="zhezhaoceng" class="fide" @click="fides"></div>
+    <div class="zzc" @click="hide"></div>
   </div>
 </template>
 <script>
@@ -25,19 +25,25 @@ export default {
   },
   methods: {
     // 显示更多按钮
-    shows() {
+    show() {
+      var show = document.getElementsByClassName("show")[0];
+      //获取‘更多’元素
+      var mores = document.getElementsByClassName("more")[0];
       // 获取遮罩层
-      var zzc = document.getElementById('zhezhaoceng ');
-    console.log(zzc)
+      var zzc = document.getElementsByClassName("zzc")[0];
+      console.log(mores, zzc);
+
       this.isClick = true;
       setTimeout(() => {
-        zzc.classList.add("show")
+        console.log(123);
+        zzc.classList.add("show-zzc");
       }, 200);
     },
-    fides() {
+    hide() {
+      var zzc = document.getElementsByClassName("zzc")[0];
       this.isClick = false;
       setTimeout(() => {
-        zzc.classList.add("fide")
+        zzc.style.display = "none";
       }, 200);
     }
   }
@@ -49,6 +55,10 @@ export default {
 }
 /* 更多菜单样式 */
 .me .more {
+  height: 100%;
+}
+/* 更多菜单样式 */
+.more {
   width: 0;
 }
 
@@ -66,21 +76,19 @@ export default {
   z-index: 1;
 }
 /* 遮罩层 */
-.me #zhezhaoceng {
+.zzc {
   /**宽高 */
   width: 100%;
-  height: 100%;
+  height: 1000px;
   opacity: 0.3;
   background-color: #000;
   position: absolute;
   z-index: 5;
+  display: none;
   top: 0;
   transition: all 0.2s linear;
 }
-.fide{
-  display: none;
-}
-.show{
+.show-zzc {
   display: block;
 }
 </style>

@@ -11,21 +11,26 @@ import pay from './components/xhs/pay'
 // import register from './components/xhs/register.vue'
 //引入主页组件
 import index from './components/xhs/index.vue'
-import Carousel from './views/carousel'
-import Indexcq from './views/indexcq'
+// import details from './components/xhs/details.vue'
+// import body from './components/xhs/Child/body.vue'
 Vue.use(Router)//将路由对象注册
 //配置组件访问路径
 export default new Router({
-  mode:"history",
-  routes:[
-    {path:'/',redirect:'/users/signin'},
-    {path:"/users/signin",component:signin},
-    {path:"/users/shopping",component:shopping},
-    {path:"/users/pay",component:pay}, 
-    {path:"/carousel",component:Carousel},
-    {path:"/index",component:index},
-    // {path:"/signin",component:register},
-    {path:"/indexcq",component:Indexcq},
-    {path:"/carousel",component:Carousel}
-  ]
+  routes: [
+    { path: "/users/signin", component: signin },
+    { path: "/users/shopping", component: shopping },
+    { path: "/users/pay", component: pay },
+    { path: "/users/me", component: me },
+    { path: "/index", component: index },
+    // {path:"/signin",component:register}
+    { path: '/', redirect: '/users/signin' },
+    {
+      path: "/details/:lid",
+      name: 'details',
+      props: true,
+      props:(route)=>(route.query.lid),
+      component: () => import(/*webpackChunkName:"details"*/  './components/xhs/details.vue'), props: true
+    }
+  ],
+  mode: "history"
 })

@@ -1,11 +1,11 @@
 <template>
   <div :class="isClick?'moreTrans':'more'">
     <div :class="isClick?'headerTrans':'header'">
-      <h1 class="mt-5">更多</h1>
+      <h1 class="gengduo">更多</h1>
     </div>
     <div class="body">
-      <div v-for="(item,index) of moreList" :key="index" class="mb-4 mt-4">
-        <img :src="require(`../../assets/${item.img}`)" class="mr-2" alt />
+      <div v-for="(item,index) of moreList" :key="index" class="menu">
+        <img :src="require(`../../assets/${item.img}`)"  alt />
         <span>{{item.title}}</span>
       </div>
     </div>
@@ -28,15 +28,35 @@ export default {
 };
 </script>
 <style scoped>
+/**更多 */
+.gengduo::before{
+  content: "";
+  display: inline-block;
+  width:2rem;
+}
 .body{
   padding: 2rem;
   text-align: left;
+}
+/**填充 */
+.body::before{
+  content: "";
+  display: block;
+  height: 6rem;
+}/**菜单栏 */
+.menu{
+  margin:1rem 0;
+  height: 2rem;
+ display: flex;
+ align-items: center;
+}
+.menu span{
+  margin-left: 1rem;
 }
 /*组件样式*/
 .more {
   position: fixed; /**固定定位 */
   width: 0; /**宽度 */
-  
   z-index: 10; /**定位层级 */
   left: -80%; /**以左边为参考位置偏移0 */
   background-color: #fff;
@@ -45,7 +65,6 @@ export default {
   transition: all 0.2s linear;
 }
 .moreTrans {
-  text-align: left;
   overflow:auto;
   height: 100%;
   position: fixed; /**固定定位 */
@@ -64,7 +83,6 @@ export default {
   top: 0; /**定位以上面为参考边界偏移0 */
   left: -80%;
   background-color: #fff;
-  padding-left: 2rem;
   transition: all 0.2s linear;
 }
 /**头部样式隐藏部分 */
@@ -75,11 +93,15 @@ export default {
   top: 0; /**定位以上面为参考边界偏移0 */
   background-color: #fff;
   width: 75%;
-  padding-left: 2rem;
   transition: all 0.2s linear;
   left: 0;
+  line-height: 6rem;
+  text-align: left;
 }
-
+/* 头部下方撑空间 */
+.space {
+  height: 6rem; /**高度 */
+}
 .body img {
   width: 1.5rem;
   height: 1.5rem;

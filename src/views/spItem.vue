@@ -1,5 +1,6 @@
 <template>
   <div>
+  <router-link :to="`/details/${i}`">
     <ul>
       <li>
         <img :src="url+item.details_pic" alt="">
@@ -8,6 +9,7 @@
       <li><span>{{item.subtitle}}</span></li>
       <li><span>¥{{item.price}}</span></li>
     </ul>
+    </router-link>
   </div>
 </template>
 <script>
@@ -17,7 +19,10 @@ export default {
       url:"http://127.0.0.1:9527/"
     }
   },
-  props:["item"]
+  props:["item","i"],
+  mounted() {
+    console.log(this.i)
+  },
 }
 </script>
 <style scoped>

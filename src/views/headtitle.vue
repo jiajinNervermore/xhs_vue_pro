@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="store">
   <div class="head">
     <div class="other" @click="change">
       <img src="../assets/shopping/search/gengduo.png" alt="">
@@ -120,20 +120,18 @@
   .font{
     font-size: 10px;
   }
-  /**头部样式 */
   .head{
-    position: fixed;/**固定定位 */
-    top:0;
-    background-color: #fff;
-    width: 100%;
     display: flex;
     justify-content: space-between;
-    height: 3rem;
-    z-index: 10;
+    position: fixed;
     align-items: center;
     padding: 3px;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    background-color: #fff;
+    height:4rem;
   }
-  
   .head>div:nth-child(2){
     width: 80%;
   }

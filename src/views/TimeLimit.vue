@@ -88,7 +88,6 @@ export default {
       ]
     };
   },
-
   methods: {
     timelimit() {
       var oldtime = new Date().getTime();
@@ -101,7 +100,6 @@ export default {
       this.m = m > 9 ? m : "0" + m;
       this.s = s > 9 ? s : "0" + s;
       setTimeout(this.timelimit, 1000);
-
     }
   },
   mounted() {
