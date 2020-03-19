@@ -33,7 +33,7 @@
         <span class="col-3">免运费</span>
       </li>
       <li class="d-flex justify-content-end">
-        <span class="text-muted">共一件</span>
+        <span class="text-muted">共{{count}}件</span>
         <span class="mr-2 ml-2">小计 :</span>
         <span class="text-danger">￥{{price*count}}</span>
       </li>
@@ -56,6 +56,9 @@ export default {
 };
 </script>
 <style scoped>
+ul{
+  list-style-type: none;
+}
 /* 商品样式 */
 /* 店铺图标 */
 .product>ul>li:nth-child(1)>img{

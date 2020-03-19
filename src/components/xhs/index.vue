@@ -87,25 +87,27 @@ export default {
         { isSelect: false }, //第三个按钮状态 2
         { isSelect: false } //第四个按钮状态 3
       ],
-      active: "shouye",
+      active: "shangcheng",
       navActive: "guanzhu"
     };
   },
   created() {
     // 通过bus.js监听自定义函数，一旦有人触发，那么久执行后面这个方法
-    this.bus.$on("backToStore", this.backToStore.bind(this));
-  },
-  beforeMount() {
-    // this.backToStore();
+    // this.bus.$on("active", this.chooseFacePlate.bind(this));
+    // console.log(this.active);  
+    //   this.chooseFacePlate();
   },
   methods: {
-    // 购物车返回到index 组件时，改变默认首页为商城
-    backToStore() {
-      this.active = "shangcheng";
-      console.log("触发成功", this.active);
-      var parent = document.getElementsByClassName('mint-tab-container-item')
-      console.log(parent);
-    }
+    // 等待触发面板选择，从而确定可以确定是要去到那个面板，接收参数是触发组件发送过来，也就说去哪儿有触发的组件决定
+    // chooseFacePlate(faceplate) {
+    //   this.active = "shangcheng";
+    //   console.log("已触发", faceplate);
+    // }
+  },
+
+  mounted() {
+    // this.chooseFacePlate();
+    console.log(this.active);
   },
   //2:注册顶部标题子组件
   components: {

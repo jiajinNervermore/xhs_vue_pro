@@ -39,6 +39,11 @@ export default {
   background-color: #f8f8ff;
   border-radius: 0.5rem;
 }
+.product::after{
+  content: "";
+  display: block;
+  height: 5rem;
+}
 img{
   border-top-left-radius:0.5rem ;
   border-top-right-radius:0.5rem ;

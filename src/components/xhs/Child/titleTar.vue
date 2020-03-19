@@ -1,7 +1,7 @@
 <template>
   <div class="title">
     <div class="too">
-      <img class="css" src="../../../assets/返 回.png" alt width="23px" />
+      <img class="css" src="../../../assets/返 回.png" alt width="23px" @click="backToStore"/>
        </div>
        <div class="three"> 
       <img class="cs" src="../../../assets/分享.png" alt width="23px" />
@@ -14,6 +14,7 @@
   </div>
 </template>
 <script>
+import {mapState} from 'vuex'
 export default {
   data() {
     return {
@@ -22,7 +23,15 @@ export default {
     };
   },
   props:['lid'],
+  computed: {
+    ...mapState(['CartList'])
+  },
   methods: {
+    // 返回商城
+    backToStore(){
+      // this.bus.$emit('active',"shangcheng");
+      this.$router.push('/index')
+    },
    lom() {
       var lid = parseInt(this.$route.params.lid)
       var obj = {lid}
@@ -48,8 +57,9 @@ export default {
         console.log(this.imgs);
       })
       .catch(err => {
-        //  console.log(err);
+         console.log(err);
       });
+      console.log(this.CartList)
   }
 };
 </script>

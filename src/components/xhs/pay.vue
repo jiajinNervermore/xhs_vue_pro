@@ -61,7 +61,6 @@
           </li>
           <li class="d-flex justify-content-between">
             <span>满减优惠</span>
-            <span>{{total}}</span>
             <span class="text-danger">-￥30</span>
           </li>
         </ul>
@@ -82,7 +81,7 @@
       </p>
       <div class="footer row no-gutters">
         <span class="col-2 text-center">总计&nbsp;:</span>
-        <span class="col-2">￥{{total}}</span>
+        <span class="col-2 text-danger">￥{{total}}</span>
         <div @click="pay" class="pay_off offset-4 col-4">
           <span>抢先支付&nbsp;{{minute}}&nbsp;{{second}}</span>
         </div>
@@ -129,9 +128,9 @@ export default {
       this.CartList.map(item=>{
         if(item.is_checked){
           total+=item.price*item.count
-        }
-        return total
+        }      
       })
+      return total
     },
     second: function() {
       return this.num(this.seconds)

@@ -1,7 +1,7 @@
 <template>
   <div id="d1">
     <titleTar :lid="lid"></titleTar>
-    <baseTar class="c1"></baseTar>
+    <baseTar class="c1" :lid="lid"></baseTar>
     <body1 :lid="lid"></body1>
   </div>
 </template> 

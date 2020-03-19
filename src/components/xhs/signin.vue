@@ -19,7 +19,13 @@
         <input type="text" placeholder="输入手机号码" v-model="phone" maxlength="11" v-focus />
       </div>
       <div class="password">
-        <input type="password" placeholder="输入验证码" maxlength="6" v-model="verification_code" id="password"/>
+        <input
+          type="password"
+          placeholder="输入验证码"
+          maxlength="6"
+          v-model="verification_code"
+          id="password"
+        />
         <button class="verification" @click="getvfc">获取验证码</button>
         <span class="count_down">重新发送{{count_down}}s</span>
       </div>
@@ -45,10 +51,10 @@
       </div>
     </div>
     <div class="message_vc w-100">
-    <div class=" offset-1 col-10 ">
-      <p class="m-0 m-1">来自"信息"</p>
-      <span>{{verification_code}}</span>
-    </div>
+      <div class="offset-1 col-10">
+        <p class="m-0 m-1">来自"信息"</p>
+        <span>{{verification_code}}</span>
+      </div>
     </div>
     <div class="input_number_trans" id="inputs">
       <div v-for="(val,index) of number" :key="index" class="num">
@@ -66,7 +72,8 @@
 <script>
 import Vue from "vue";
 //引入vuex里面的属性方法
-import {mapMutations} from "vuex"
+import { mapState, mapMutations } from "vuex";
+import { mapActions } from "vuex";
 //自动获取焦点
 Vue.directive("focus", {
   inserted(domElem) {
@@ -76,43 +83,49 @@ Vue.directive("focus", {
   }
 });
 export default {
-  
   data() {
     return {
-      result:{},//保存用户信息
+      result: {}, //保存用户信息
       count_down: 60,
       phone: "",
       verification_code: "",
       verification: true,
-      number: ["", "ABC", "EDF", "GHI", "JKL", "MNO", "PQRS", "TUV", "WXYZ", 0]
+      number: ["", "ABC", "EDF", "GHI", "JKL", "MNO", "PQRS", "TUV", "WXYZ", 0],
+      carts:[]//临时保存购物车数据
     };
   },
+  computed: {
+    //解构vuex里面的result,CartList属性
+    ...mapState(["CartList"])
+  },
   methods: {
-    ...mapMutations(['setUser']),
+    //解构vuex里面的方法
+    ...mapMutations(["setCartList","setUser"]),
     // 获取验证号码倒计时
     getvfc(e) {
+      let that = this;
       e.target.style.display = "none";
       e.target.nextElementSibling.style.display = "block";
       var timer = setInterval(() => {
-        this.count_down -= 1;
+        that.count_down -= 1;
       }, 1000);
 
       var url = "users/signin";
-      var obj = { phone: this.phone };
+      var obj = { phone: that.phone };
       this.axios
         .get(url, { params: obj })
         .then(res => {
           // 获取验证码
-          this.verification_code = res.data.obj.verification_code;
-          var message = document.getElementsByClassName("message_vc")[0]
-          message.style.display="block"
+          that.verification_code = res.data.obj.verification_code;
+          var message = document.getElementsByClassName("message_vc")[0];
+          message.style.display = "block";
           console.log(res);
         })
         .catch(err => {
           return;
         });
       setTimeout(() => {
-        if (this.count_down <= 0) {
+        if (that.count_down <= 0) {
           clearInterval(timer);
           e.target.style.display = "block";
           e.target.nextElementSibling.style.display = "none";
@@ -121,27 +134,56 @@ export default {
     },
     // 登录请求
     login() {
+      let that = this;
       var url = "/users/login";
       // 设置请求参数，电话号码，验证码
       var obj = {
-        phone: this.phone,
-        verification_code: this.verification_code
+        phone: that.phone,
+        verification_code: that.verification_code
       };
       // 登录请求
       this.axios.get(url, { params: obj }).then(res => {
         console.log(res);
         if (res.data.code == 1) {
-          this.$toast("登录成功");
-          console.log(res)
-          this.result = res.data.data[0];
-          this.setUser(this.result);
-          // 跳转到主页
-          this.$router.push('/index')
+          that.$toast("登录成功");
+          console.log(res);
+          
+          that.result = res.data.data[0];
+          console.log(that.result);
+          that.setUser(this.result);
+          // 跳转到主页,先改变index avtive的值
+          // this.bus.$emit("active", "shouye");
+          this.getCart();
+          this.$router.push("/index");
           return;
         } else {
           this.$toast("登录失败");
         }
       });
+    },
+    getCart() {
+      let that = this;
+      // 根据vuex保存的用户信息，取出用户编号，查询用户购物车信息
+      this.uid = this.result.uid;
+      console.log(this.uid);
+      // this.cart({uid:this.uid});
+      var obj = { uid: this.uid };
+      this.axios
+        .get("cart", { params: obj })
+        .then(res => {
+          if (res.data.code == 1) {
+            // 强行赋值两个变量，is_checked代表是否选中，is_activity代表是否有促销打折活动
+            res.data.data.map(item => {
+              item.is_checked = false;
+              item.is_activity = true;
+            });
+            //将最后的结果赋值给carts
+            that.carts = res.data.data;
+            console.log(that.carts);
+            that.$store.commit("setCartList", that.carts);
+          }
+        })
+        .catch(err => console.log(err));
     }
   },
   watch: {
@@ -165,10 +207,10 @@ export default {
         this.verification = false;
         var lb = document.getElementById("lb");
         lb.style.cssText = "background-color:#ff0033;color:#fff;";
-        var message = document.getElementsByClassName("message_vc")[0]
-        setTimeout(()=>{
-          message.style.display="none"
-        },2000)          
+        var message = document.getElementsByClassName("message_vc")[0];
+        setTimeout(() => {
+          message.style.display = "none";
+        }, 2000);
       }
     }
   }
@@ -291,14 +333,14 @@ a {
 .register .message_vc {
   display: none;
   position: fixed;
-  bottom:18rem;
+  bottom: 18rem;
   border-left: 1px solid lightblue;
   border-right: 1px solid lightblue;
   text-align: center;
   background-color: lightgray;
 }
 /* 手机号码输入框 */
- .input_number {
+.input_number {
   height: 0;
   position: fixed;
   bottom: 0;
@@ -307,7 +349,7 @@ a {
   justify-content: end;
 }
 /* 手机号码输入框过渡效果 */
- .input_number_trans {
+.input_number_trans {
   width: 100%;
   height: 15rem;
   position: fixed;
@@ -321,7 +363,7 @@ a {
   padding: 0;
 }
 /* 数字按钮 */
- .num {
+.num {
   background-color: #fff;
   color: #000;
   text-align: center;
@@ -333,10 +375,10 @@ a {
   height: 3rem;
 }
 /**0按钮居中 */
-.jz{
+.jz {
   line-height: 3rem;
 }
- .num > span:first-child {
+.num > span:first-child {
   font-size: 1rem;
 }
 .num > span:last-child {
@@ -356,7 +398,7 @@ a {
   height: 0;
 }
 /* 过渡效果 */
- .close_num_trans {
+.close_num_trans {
   position: absolute;
   bottom: 0;
   right: 0.9rem;

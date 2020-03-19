@@ -6,7 +6,7 @@
         <img src="../../../assets/icon.png" alt />
       </a>
       <h3 class="ml-4 mr-5">购物车</h3>
-      <span class="manage ml-3">管理</span>
+      <span class="manage ml-3" @click="admin">管理</span>
     </div>
     <div class="header_down"></div>
 
@@ -78,18 +78,21 @@ export default {
   props: ["list"],
   data() {
     return {
-      url:'http://127.0.0.1:9527/'
+      url: "http://127.0.0.1:9527/"
     };
   },
 
   methods: {
+    admin(){//触发父元素上面的admin事件改变删除兰的状态
+      this.$emit('admin')
+    },
     // 返回商城
     backToStore() {
       // 兄弟传参：修改首页的active默认值
-      this.bus.$emit("backToStore");
+      //跳转到商城前先改变商城active选中的值
+      // this.bus.$emit("active", "shangcheng");
       // // setTimeout(()=>{},100)
       this.$router.push("/index");
-     
     },
     changeCheck(i) {
       this.$emit("changeCheck", i);
