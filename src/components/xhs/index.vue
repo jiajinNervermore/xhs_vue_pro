@@ -206,16 +206,18 @@ export default {
   margin: 0 !important;
 }
 /* 加号 */
+
 .mint-tab-item > .mint-tab-item-label > .shoot {
-  width: 3rem; /**宽度 */
-  height: 2rem; /**高度 */
+  width: 3rem ; /**宽度 */
   background-color: #ff0033; /**背景色 */
   color: #fff; /**字体颜色 */
   font-weight: bold; /**字体加粗 */
-  padding: 0 1rem; /**内边距 */
   border-radius: 0.75rem; /**圆角 */
   font-size: 36px;
+  padding-left: 1rem;padding-right: 1rem;
+  padding-bottom: 0.5rem;
 }
+
 
 /* tabbar选中样式 */
 .mint-tabbar .is-selected span {
