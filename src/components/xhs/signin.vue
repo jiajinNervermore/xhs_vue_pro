@@ -50,7 +50,7 @@
         <img src="../../assets/changyonglogo29.png" alt />
       </div>
     </div>
-    <div class="message_vc w-100">
+    <div class="message_vcs w-100">
       <div class="offset-1 col-10">
         <p class="m-0 m-1">来自"信息"</p>
         <span>{{verification_code}}</span>
@@ -117,9 +117,9 @@ export default {
         .then(res => {
           // 获取验证码
           that.verification_code = res.data.obj.verification_code;
-          var message = document.getElementsByClassName("message_vc")[0];
+          var message = document.getElementsByClassName("message_vcs")[0];
           message.style.display = "block";
-          console.log(res);
+          console.log(res,message);
         })
         .catch(err => {
           return;
@@ -207,7 +207,7 @@ export default {
         this.verification = false;
         var lb = document.getElementById("lb");
         lb.style.cssText = "background-color:#ff0033;color:#fff;";
-        var message = document.getElementsByClassName("message_vc")[0];
+        var message = document.getElementsByClassName("message_vcs")[0];
         setTimeout(() => {
           message.style.display = "none";
         }, 2000);
@@ -330,14 +330,14 @@ a {
   height: 2rem;
 }
 /* 验证码信息自动输入 */
-.register .message_vc {
-  display: none;
-  position: fixed;
-  bottom: 18rem;
+.message_vcs {
+  position: fixed !important;
+  bottom:14rem !important;
   border-left: 1px solid lightblue;
   border-right: 1px solid lightblue;
   text-align: center;
   background-color: lightgray;
+  display: none;
 }
 /* 手机号码输入框 */
 .input_number {
@@ -387,6 +387,7 @@ a {
 /* 按钮组 */
 #inputs {
   margin: 0;
+  height: 14rem;
 }
 /* 回退输入号码 */
 .close_num {
