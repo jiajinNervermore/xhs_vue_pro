@@ -50,7 +50,7 @@ export default {
   props:['pic','title','count','keyword','store','price'],
   data(){
     return {
-      url :'http://127.0.0.1:9527/'
+      url :'http://xhsljjhouhei.applinzi.com/'
     }
   }
 };

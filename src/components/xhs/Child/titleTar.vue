@@ -18,13 +18,12 @@ import {mapState} from 'vuex'
 export default {
   data() {
     return {
-      url: "http://127.0.0.1:9527",
       imgs: ""
     };
   },
   props:['lid'],
   computed: {
-    ...mapState(['CartList'])
+    ...mapState(['CartList','url'])
   },
   methods: {
     // 返回商城

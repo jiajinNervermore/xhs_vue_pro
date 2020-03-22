@@ -61,14 +61,13 @@
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState,mapMutations } from "vuex";
 export default {
   data() {
     return {
       count: 1,
       popupVisible: false,
       innerWidth: window.innerWidth,
-      url: "http://127.0.0.1:9527",
       imgs: "",
       data: {}
     };
@@ -76,7 +75,7 @@ export default {
   props: ["lid"],
   computed: {
     //获取vuex里面保存的购物车数据
-    ...mapState(["CartList", "result"])
+    ...mapState(["CartList", "result",'url'])
   },
   created() {
     console.log(this.result.uid, this.lid);
@@ -96,6 +95,7 @@ export default {
       });
   },
   methods: {
+    ...mapMutations(['setCartList']),
     //修改商品数量
     change(n) {
       this.count += n;
@@ -106,36 +106,37 @@ export default {
     },
     //加入购物车,
     addCart() {
+      let that = this
       var num = 0;
       //遍历购物车判断商品是否在购物车中，如果购物车有此商品，那么提示已经在购物车了，并且弹出提示框，问是否去购物车，如果没有就发送axios请求加入购物车
-      this.CartList.map(item => {
-        if (item.lid == this.lid) {
+     that.CartList.map(item => {
+        if (item.lid == that.lid) {
           num++;
         }
       });
       if (num == 0) {
         var obj = {
-          product_id: this.lid,
-          user_id: this.result.uid,
-          count: this.count
+          product_id: that.lid,
+          user_id: that.result.uid,
+          count: that.count
         };
         //发送添加请求,只有用户登录的情况下才发送请求
-        if (this.result.uid) {
-          this.axios.get("/addcart", { params: obj }).then(res => {
+        if (that.result.uid) {
+          that.axios.get("/addcart", { params: obj }).then(res => {
             console.log(res);
             if (res.data.code == 1) {
-              this.$toast("添加成功");
-              this.$router.push("/index");
+              that.$toast("添加成功");
+              that.$router.push("/index");
             } else {
-              this.$toast("添加失败");
+              that.$toast("添加失败");
             }
           });
         } else {
-          this.$toast("登录后才能加入购物车");
-          this.messagebox
+          that.$toast("登录后才能加入购物车");
+          that.messagebox
             .confirm("是否回到登录页面？")
             .then(action => {
-              this.$router.push("/users/signin");
+              that.$router.push("/users/signin");
             })
             .catch(err => {
               return;

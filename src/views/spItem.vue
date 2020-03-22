@@ -16,7 +16,7 @@
 export default {
   data(){
     return {
-      url:"http://127.0.0.1:9527/"
+      url:"http://xhsljjhouhei.applinzi.com/"
     }
   },
   props:["item","i"]

@@ -9,6 +9,7 @@ export default new Vuex.Store({
     result:{},//保存用户信息
     uname: "",
     count:0,
+    url:"http://xhsljjhouhei.applinzi.com/",
     cartCount:0,
     CartList:[],//用户购物车信息
     moreList: [

@@ -61,7 +61,7 @@ export default {
     };
   },
   created() {
-    this.getCart();
+    this.carts = this.CartList;
   },
   computed: {
     //计算总的选中商品个数
@@ -80,20 +80,28 @@ export default {
     delCart() {
       let that = this;
       let pids = [];
-      let obj = {user_id : that.result.uid};
-      that.CartList.map(item=>{
+      let obj = { user_id: that.result.uid };
+      let cartIs = []; //保存删除的商品编号下标---vuex
+      that.CartList.map((item, i) => {
         //遍历购物车，选中选中的是商品，将商品编号存到一个数组pids里面
-        if(item.is_checked){
-          pids.push(item.lid)
+        if (item.is_checked) {
+          pids.push(item.lid);
+          cartIs.push[i];
         }
-      })
-      obj.pids=pids;
-      that.axios.get('delCart',{params:obj}).then(res=>{
-        console.log(res)
-        if(res.data.code==1){
-          that.$router.push('/users/shopping')
+      });
+      obj.pids = pids;
+      that.axios.get("delCart", { params: obj }).then(res => {
+        console.log(res);
+        if (res.data.code == 1) {
+          //遍历商品编号下标，并删除他
+          cartIs.map(item => {
+            that.carts.splice(item, 1);
+          });
+          //将修改后的商品列表赋值给vuex里面的商品列表，用于刷新页面
+          that.$store.commit("setCartList", that.carts);
+          that.$router.push("/users/shopping");
         }
-      })
+      });
     },
     // 管理删除栏和结算栏状态
     admin() {
@@ -126,30 +134,6 @@ export default {
       if (this.totalPrice != 0) {
         this.$router.push("/users/pay");
       }
-    },
-    getCart() {
-      let that = this;
-      // 根据vuex保存的用户信息，取出用户编号，查询用户购物车信息
-      that.uid = that.result.uid;
-      console.log(that.uid);
-      // this.cart({uid:this.uid});
-      var obj = { uid: that.uid };
-      that.axios
-        .get("cart", { params: obj })
-        .then(res => {
-          if (res.data.code == 1) {
-            // 强行赋值两个变量，is_checked代表是否选中，is_activity代表是否有促销打折活动
-            res.data.data.map(item => {
-              item.is_checked = false;
-              item.is_activity = true;
-            });
-            //将最后的结果赋值给carts
-            that.carts = res.data.data;
-            console.log(that.carts);
-            that.$store.commit("setCartList", that.carts);
-          }
-        })
-        .catch(err => console.log(err));
     }
   }
 };

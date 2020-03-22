@@ -74,14 +74,16 @@
   </div>
 </template>
 <script>
+import {mapState} from "vuex"
 export default {
   props: ["list"],
   data() {
     return {
-      url: "http://127.0.0.1:9527/"
     };
   },
-
+computed:{
+  ...mapState(['url'])
+},
   methods: {
     admin(){//触发父元素上面的admin事件改变删除兰的状态
       this.$emit('admin')

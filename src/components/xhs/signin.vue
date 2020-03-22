@@ -351,7 +351,7 @@ a {
 /* 手机号码输入框过渡效果 */
 .input_number_trans {
   width: 100%;
-  height: 15rem;
+  height: 33%;
   position: fixed;
   bottom: 0;
   background-color: lightgray;
@@ -372,7 +372,7 @@ a {
   margin: 0.25rem;
   border-radius: 0.5rem;
   width: 30%;
-  height: 3rem;
+  height: 20%;
 }
 /**0按钮居中 */
 .jz {

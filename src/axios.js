@@ -4,7 +4,7 @@ import qs from "qs";
 import store from './store'
 
 const Axios=axios.create({
-  baseURL:"http://127.0.0.1:9527/",
+  baseURL:"http://xhsljjhouhei.applinzi.com/",
   withCredentials:true
 })
 Axios.interceptors.request.use(
